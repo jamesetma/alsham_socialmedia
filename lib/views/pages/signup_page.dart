@@ -33,7 +33,7 @@ class SignupPage extends StatelessWidget {
               child: TextFormField(
                 validator: (value) {},
                 decoration: InputDecoration(
-                  hintText: '+ 963 992 555 666',
+                  hintText: '+963 992 555 666',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),

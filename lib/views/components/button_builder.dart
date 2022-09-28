@@ -25,9 +25,10 @@ class ButtonBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialButton(
       elevation: 0.0,
-      height: 30,
+      height: 50,
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0)),
+        borderRadius: BorderRadius.circular(10.0),
+      ),
       onPressed: onPressed,
       color: color,
       disabledColor: onPressed != null ? null : AppColors.gray,
@@ -47,8 +48,8 @@ class ButtonBuilder extends StatelessWidget {
                       TextStyle(
                           fontFamily: 'Inter',
                           fontSize: 20,
-                          fontWeight: FontWeight.w400,
-                          color: textColor ?? AppColors.black),
+                          fontWeight: FontWeight.w600,
+                          color: textColor ?? AppColors.white),
                 ),
                 const SizedBox(),
               ],
