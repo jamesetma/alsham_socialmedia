@@ -1,6 +1,7 @@
 import 'package:alsham_socialmedia/constants/app_colors.dart';
 import 'package:alsham_socialmedia/constants/paddings.dart';
 import 'package:alsham_socialmedia/views/components/button_builder.dart';
+import 'package:alsham_socialmedia/views/pages/personal_info_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
@@ -23,14 +24,17 @@ class VerificationPage extends StatelessWidget {
             children: [
               const Text(
                 'OTP sent',
-                style: TextStyle(
-                    fontWeight: FontWeight.w600, fontSize: 16),
+                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
               ),
               const Text('Enter the OTP sent to you'),
               PinCodeTextField(
                 appContext: context,
                 length: 4,
-                onChanged: (val) {},
+                onChanged: (val) {
+                  Get.to(() {
+                    PersonalInfoPage();
+                  });
+                },
                 pinTheme: PinTheme(
                     shape: PinCodeFieldShape.box,
                     activeColor: AppColors.appPrimary,
@@ -51,7 +55,7 @@ class VerificationPage extends StatelessWidget {
                       text: 'Next',
                       textColor: AppColors.white,
                       onPressed: () {
-                        // Get.to(() => const VerificationPage());
+                        Get.to(() => PersonalInfoPage());
                       },
                     ),
                   ),

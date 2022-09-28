@@ -3,6 +3,8 @@ import 'package:alsham_socialmedia/constants/paddings.dart';
 import 'package:alsham_socialmedia/views/components/button_builder.dart';
 import 'package:alsham_socialmedia/views/components/dropdown_menu_builder.dart';
 import 'package:alsham_socialmedia/views/components/textbox_builder.dart';
+import 'package:alsham_socialmedia/views/components/textfield_builder.dart';
+import 'package:alsham_socialmedia/views/pages/username_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -27,8 +29,7 @@ class PersonalInfoPage extends StatelessWidget {
           children: [
             const Text(
               'Personal Information',
-              style: TextStyle(
-                  fontWeight: FontWeight.w600, fontSize: 16),
+              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
             ),
             const Text('Please fill the following'),
             const Padding(
@@ -40,25 +41,14 @@ class PersonalInfoPage extends StatelessWidget {
               padding: EdgeInsets.only(top: 8.0),
               child: Text('Email Address'),
             ),
-            TextFormField(
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: AppColors.gray,
-                border: OutlineInputBorder(
-                  borderSide: BorderSide.none,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-            ),
+            const TextFieldBuilder(),
             Padding(
               padding: const EdgeInsets.only(top: 8),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  DropDownMenu(
-                      currentValue: currentValue, items: genders),
-                  DropDownMenu(
-                      currentValue: currentValue, items: genders),
+                  DropDownMenu(currentValue: currentValue, items: genders),
+                  DropDownMenu(currentValue: currentValue, items: genders),
                 ],
               ),
             ),
@@ -75,36 +65,14 @@ class PersonalInfoPage extends StatelessWidget {
                   child: ButtonBuilder(
                     text: 'Next',
                     color: AppColors.appPrimary,
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.to(() => UsernamePage());
+                    },
                   ),
                 ),
               ),
             )
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class TextFieldBuilder extends StatelessWidget {
-  const TextFieldBuilder({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 50,
-      child: TextFormField(
-        decoration: InputDecoration(
-          contentPadding: const EdgeInsets.only(bottom: 6, left: 10),
-          filled: true,
-          fillColor: AppColors.gray,
-          border: OutlineInputBorder(
-            borderSide: BorderSide.none,
-            borderRadius: BorderRadius.circular(10),
-          ),
         ),
       ),
     );
