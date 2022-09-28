@@ -4,6 +4,7 @@ import 'package:alsham_socialmedia/views/components/button_builder.dart';
 import 'package:alsham_socialmedia/views/components/dropdown_menu_builder.dart';
 import 'package:alsham_socialmedia/views/components/textbox_builder.dart';
 import 'package:alsham_socialmedia/views/components/textfield_builder.dart';
+import 'package:alsham_socialmedia/views/pages/username_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -41,16 +42,7 @@ class PersonalInfoPage extends StatelessWidget {
               padding: EdgeInsets.only(top: 8.0),
               child: Text('Email Address'),
             ),
-            TextFormField(
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: AppColors.gray,
-                border: OutlineInputBorder(
-                  borderSide: BorderSide.none,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-            ),
+            const TextFieldBuilder(),
             Padding(
               padding: const EdgeInsets.only(top: 8),
               child: Row(
@@ -76,7 +68,9 @@ class PersonalInfoPage extends StatelessWidget {
                   child: ButtonBuilder(
                     text: 'Next',
                     color: AppColors.appPrimary,
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.to(() => UsernamePage());
+                    },
                   ),
                 ),
               ),

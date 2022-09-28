@@ -19,8 +19,7 @@ class DropDownMenu extends StatelessWidget {
         width: Get.width / 3,
         padding: const EdgeInsets.symmetric(horizontal: 8),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: AppColors.gray),
+            borderRadius: BorderRadius.circular(10), color: AppColors.gray),
         child: DropdownButtonHideUnderline(
           child: DropdownButton<String>(
               elevation: 1,

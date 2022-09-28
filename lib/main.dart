@@ -1,6 +1,7 @@
 import 'package:alsham_socialmedia/constants/app_colors.dart';
 import 'package:alsham_socialmedia/views/pages/login_page.dart';
 import 'package:alsham_socialmedia/views/pages/personal_info_page.dart';
+import 'package:alsham_socialmedia/views/pages/verification_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
