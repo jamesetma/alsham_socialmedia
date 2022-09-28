@@ -34,12 +34,13 @@ migrate_working_dir/
 
 # Web related
 lib/generated_plugin_registrant.dart
-
 # Symbolication related
 app.*.symbols
 
 # Obfuscation related
 app.*.map.json
+android/gradle/wrapper/gradle-wrapper.properties
+
 
 # Android Studio will place build artifacts here
 /android/app/debug

@@ -1,17 +1,12 @@
 import 'package:alsham_socialmedia/constants/app_colors.dart';
 import 'package:alsham_socialmedia/constants/paddings.dart';
 import 'package:alsham_socialmedia/views/components/button_builder.dart';
-import 'package:alsham_socialmedia/views/components/dropdown_menu_builder.dart';
 import 'package:alsham_socialmedia/views/components/textbox_builder.dart';
 import 'package:alsham_socialmedia/views/components/textfield_builder.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-class PersonalInfoPage extends StatelessWidget {
-  PersonalInfoPage({Key? key}) : super(key: key);
-
-  var currentValue = 'Male'.obs;
-  List<String> genders = ['Male', 'Female'];
+class LoginPage extends StatelessWidget {
+  const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,47 +22,30 @@ class PersonalInfoPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'Personal Information',
+              'Sign In',
               style: TextStyle(
                   fontWeight: FontWeight.w600, fontSize: 16),
             ),
-            const Text('Please fill the following'),
+            const Text('Enter your credentials'),
             const Padding(
               padding: EdgeInsets.only(top: 8.0),
-              child: Text('Full Name'),
+              child: Text('Username'),
             ),
             const TextFieldBuilder(),
             const Padding(
               padding: EdgeInsets.only(top: 8.0),
-              child: Text('Email Address'),
+              child: Text('Password'),
             ),
-            TextFormField(
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: AppColors.gray,
-                border: OutlineInputBorder(
-                  borderSide: BorderSide.none,
-                  borderRadius: BorderRadius.circular(10),
-                ),
+            const TextFieldBuilder(
+              obsecureText: true,
+            ),
+            Align(
+              alignment: Alignment.centerRight,
+              child: TextButton(
+                onPressed: () {},
+                child: const Text('Forgot Password?'),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  DropDownMenu(
-                      currentValue: currentValue, items: genders),
-                  DropDownMenu(
-                      currentValue: currentValue, items: genders),
-                ],
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.only(top: 8.0),
-              child: Text('About'),
-            ),
-            const TextBoxBuilder(),
             Expanded(
               child: Align(
                 alignment: Alignment.bottomCenter,
@@ -85,5 +63,6 @@ class PersonalInfoPage extends StatelessWidget {
         ),
       ),
     );
+    ;
   }
 }
