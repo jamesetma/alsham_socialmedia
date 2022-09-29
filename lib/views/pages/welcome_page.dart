@@ -1,6 +1,7 @@
 import 'package:alsham_socialmedia/constants/app_colors.dart';
 import 'package:alsham_socialmedia/constants/paddings.dart';
 import 'package:alsham_socialmedia/views/components/button_builder.dart';
+import 'package:alsham_socialmedia/views/pages/landing_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -26,7 +27,9 @@ class WelcomePage extends StatelessWidget {
               ),
               ButtonBuilder(
                 text: 'Continue',
-                onPressed: () {},
+                onPressed: () {
+                  Get.to(() => LandingPage());
+                },
                 color: AppColors.appPrimary,
               )
             ],
