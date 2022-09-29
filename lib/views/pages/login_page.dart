@@ -3,7 +3,9 @@ import 'package:alsham_socialmedia/constants/paddings.dart';
 import 'package:alsham_socialmedia/views/components/button_builder.dart';
 import 'package:alsham_socialmedia/views/components/textbox_builder.dart';
 import 'package:alsham_socialmedia/views/components/textfield_builder.dart';
+import 'package:alsham_socialmedia/views/pages/forgot_password.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -23,8 +25,7 @@ class LoginPage extends StatelessWidget {
           children: [
             const Text(
               'Sign In',
-              style: TextStyle(
-                  fontWeight: FontWeight.w600, fontSize: 16),
+              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
             ),
             const Text('Enter your credentials'),
             const Padding(
@@ -42,7 +43,9 @@ class LoginPage extends StatelessWidget {
             Align(
               alignment: Alignment.centerRight,
               child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Get.to(() => ForgotPassword());
+                },
                 child: const Text('Forgot Password?'),
               ),
             ),

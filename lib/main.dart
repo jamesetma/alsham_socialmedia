@@ -2,6 +2,7 @@ import 'package:alsham_socialmedia/constants/app_colors.dart';
 import 'package:alsham_socialmedia/views/pages/login_page.dart';
 import 'package:alsham_socialmedia/views/pages/personal_info_page.dart';
 import 'package:alsham_socialmedia/views/pages/verification_page.dart';
+import 'package:alsham_socialmedia/views/pages/welcome_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       theme: ThemeData(scaffoldBackgroundColor: AppColors.white),
-      home: LoginPage(),
+      home: WelcomePage(),
     );
   }
 }
