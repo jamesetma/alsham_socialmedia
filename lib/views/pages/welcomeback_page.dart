@@ -4,8 +4,8 @@ import 'package:alsham_socialmedia/views/components/button_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class WelcomePage extends StatelessWidget {
-  const WelcomePage({Key? key}) : super(key: key);
+class WelcomeBackPage extends StatelessWidget {
+  const WelcomeBackPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class WelcomePage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
-                'Welcome',
+                'Welcome back!',
                 style: TextStyle(
                     fontSize: 16, fontWeight: FontWeight.w600),
               ),

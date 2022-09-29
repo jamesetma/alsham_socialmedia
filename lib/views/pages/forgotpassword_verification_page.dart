@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
-class VerificationPage extends StatelessWidget {
-  const VerificationPage({Key? key}) : super(key: key);
+class ForgotPasswordVerificationPage extends StatelessWidget {
+  const ForgotPasswordVerificationPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

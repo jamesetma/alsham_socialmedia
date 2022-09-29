@@ -1,7 +1,6 @@
 import 'package:alsham_socialmedia/constants/app_colors.dart';
 import 'package:alsham_socialmedia/constants/paddings.dart';
 import 'package:alsham_socialmedia/views/components/button_builder.dart';
-import 'package:alsham_socialmedia/views/components/textbox_builder.dart';
 import 'package:alsham_socialmedia/views/components/textfield_builder.dart';
 import 'package:flutter/material.dart';
 
@@ -52,7 +51,7 @@ class LoginPage extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 20),
                   child: ButtonBuilder(
-                    text: 'Next',
+                    text: 'Sign In',
                     color: AppColors.appPrimary,
                     onPressed: () {},
                   ),
@@ -63,6 +62,5 @@ class LoginPage extends StatelessWidget {
         ),
       ),
     );
-    ;
   }
 }

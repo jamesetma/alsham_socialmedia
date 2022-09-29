@@ -1,18 +1,11 @@
 import 'package:alsham_socialmedia/constants/app_colors.dart';
 import 'package:alsham_socialmedia/constants/paddings.dart';
 import 'package:alsham_socialmedia/views/components/button_builder.dart';
-import 'package:alsham_socialmedia/views/components/dropdown_menu_builder.dart';
-import 'package:alsham_socialmedia/views/components/textbox_builder.dart';
 import 'package:alsham_socialmedia/views/components/textfield_builder.dart';
-import 'package:alsham_socialmedia/views/pages/username_page.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-class PersonalInfoPage extends StatelessWidget {
-  PersonalInfoPage({Key? key}) : super(key: key);
-
-  var currentValue = 'Male'.obs;
-  List<String> genders = ['Male', 'Female'];
+class NewPasswordPage extends StatelessWidget {
+  const NewPasswordPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,49 +21,34 @@ class PersonalInfoPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'Personal Information',
+              'Pick a new Password',
               style: TextStyle(
                   fontWeight: FontWeight.w600, fontSize: 16),
             ),
-            const Text('Please fill the following'),
+            const Text('Help secure your account'),
             const Padding(
               padding: EdgeInsets.only(top: 8.0),
-              child: Text('Full Name'),
+              child: Text('New Password'),
             ),
-            const TextFieldBuilder(),
-            const Padding(
-              padding: EdgeInsets.only(top: 8.0),
-              child: Text('Email Address'),
-            ),
-            const TextFieldBuilder(),
-            Padding(
-              padding: const EdgeInsets.only(top: 8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  DropDownMenu(
-                      currentValue: currentValue, items: genders),
-                  DropDownMenu(
-                      currentValue: currentValue, items: genders),
-                ],
-              ),
+            const TextFieldBuilder(
+              obsecureText: true,
             ),
             const Padding(
               padding: EdgeInsets.only(top: 8.0),
-              child: Text('About'),
+              child: Text('Confrim new Password'),
             ),
-            const TextBoxBuilder(),
+            const TextFieldBuilder(
+              obsecureText: true,
+            ),
             Expanded(
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 20),
                   child: ButtonBuilder(
-                    text: 'Next',
+                    text: 'Done',
                     color: AppColors.appPrimary,
-                    onPressed: () {
-                      Get.to(() => const UsernamePage());
-                    },
+                    onPressed: () {},
                   ),
                 ),
               ),

@@ -15,7 +15,7 @@ class UsernamePage extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
-        leading: BackButton(
+        leading: const BackButton(
           color: Colors.black,
         ),
       ),
@@ -24,31 +24,32 @@ class UsernamePage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Select a Username',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+              style: TextStyle(
+                  fontSize: 16, fontWeight: FontWeight.w600),
             ),
-            Text('Help secure your account'),
-            Text('Username'),
-            TextFieldBuilder(),
-            Text('password'),
-            TextFieldBuilder(
+            const Text('Help secure your account'),
+            const Text('Username'),
+            const TextFieldBuilder(),
+            const Text('password'),
+            const TextFieldBuilder(
               obsecureText: true,
             ),
-            Text('Confirm Password'),
-            TextFieldBuilder(
+            const Text('Confirm Password'),
+            const TextFieldBuilder(
               obsecureText: true,
             ),
             Expanded(
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: Padding(
-                  padding: EdgeInsets.only(bottom: 20),
+                  padding: const EdgeInsets.only(bottom: 20),
                   child: ButtonBuilder(
                     text: 'Done',
                     color: AppColors.appPrimary,
                     onPressed: () {
-                      Get.to(() => WelcomePage());
+                      Get.to(() => const WelcomePage());
                     },
                   ),
                 ),
