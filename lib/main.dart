@@ -1,4 +1,5 @@
 import 'package:alsham_socialmedia/constants/app_colors.dart';
+import 'package:alsham_socialmedia/views/pages/landing_page.dart';
 import 'package:alsham_socialmedia/views/pages/login_page.dart';
 import 'package:alsham_socialmedia/views/pages/personal_info_page.dart';
 import 'package:alsham_socialmedia/views/pages/verification_page.dart';
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       theme: ThemeData(scaffoldBackgroundColor: AppColors.white),
-      home: WelcomePage(),
+      home: LandingPage(),
     );
   }
 }
