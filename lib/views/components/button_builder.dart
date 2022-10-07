@@ -30,7 +30,7 @@ class ButtonBuilder extends StatelessWidget {
         borderRadius: BorderRadius.circular(10.0),
       ),
       onPressed: onPressed,
-      color: color,
+      color: color ?? AppColors.appPrimary,
       disabledColor: onPressed != null ? null : AppColors.gray,
       child: child ??
           Container(
