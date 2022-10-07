@@ -22,6 +22,9 @@ class PostContainer extends StatelessWidget {
             CircleAvatar(
               backgroundImage: null,
             ),
+            SizedBox(
+              width: 8,
+            ),
             Text(
               'Seveen',
             ),
