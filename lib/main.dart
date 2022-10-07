@@ -1,5 +1,6 @@
 import 'package:alsham_socialmedia/constants/app_colors.dart';
 import 'package:alsham_socialmedia/views/pages/create_post_page.dart';
+import 'package:alsham_socialmedia/views/pages/edit_page.dart';
 import 'package:alsham_socialmedia/views/pages/login_page.dart';
 import 'package:alsham_socialmedia/views/pages/notifications_page.dart';
 import 'package:alsham_socialmedia/views/pages/personal_info_page.dart';
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       theme: ThemeData(scaffoldBackgroundColor: AppColors.white),
-      home: CreatePostPage(),
+      home: EditPage(),
     );
   }
 }
