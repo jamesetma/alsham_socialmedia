@@ -2,13 +2,11 @@ import 'package:alsham_socialmedia/constants/app_colors.dart';
 import 'package:alsham_socialmedia/constants/paddings.dart';
 import 'package:alsham_socialmedia/views/components/button_builder.dart';
 import 'package:alsham_socialmedia/views/components/post_container.dart';
-import 'package:alsham_socialmedia/views/pages/edit_page.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 
-class MyProfilePage extends StatelessWidget {
-  const MyProfilePage({super.key});
+class ProfilePage extends StatelessWidget {
+  const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +14,10 @@ class MyProfilePage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: AppColors.white,
         elevation: 0,
+        leading: const BackButton(color: Colors.black),
         centerTitle: true,
         title: const Text(
-          'My Profile',
+          'Profile',
           style: TextStyle(color: Colors.black),
         ),
       ),
@@ -30,38 +29,48 @@ class MyProfilePage extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(children: const [
-                    CircleAvatar(),
+                  Row(children: [
+                    const CircleAvatar(),
                     SizedBox(
-                      width: 12,
+                      width: 8,
                     ),
-                    Text('Name'),
+                    const Text('Name'),
                   ]),
                   SizedBox(
-                    // width: 25,
+                    width: 25,
                     child: IconButton(
-                      icon: const Icon(IconlyLight.setting),
+                      icon: const Icon(Icons.more_vert),
                       onPressed: () {},
                     ),
                   ),
                 ],
               ),
-              const Padding(
-                padding: EdgeInsets.only(bottom: 8),
-                child: Text(
-                  'hello my name is salah and I study computer engineering at the university',
-                ),
-              ),
-              SizedBox(
-                height: 40,
-                child: ButtonBuilder(
-                  textStyle:
-                      TextStyle(fontSize: 14, color: AppColors.white),
-                  onPressed: () {
-                    Get.to(() => EditPage());
-                  },
-                  text: 'Edit Profile',
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Flexible(
+                    child: Text(
+                      'hello my name is salah and I study computer engineering at the university',
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      IconButton(
+                        onPressed: () {},
+                        icon: const Icon(IconlyLight.chat),
+                      ),
+                      SizedBox(
+                        height: 30,
+                        child: ButtonBuilder(
+                          textStyle: const TextStyle(
+                              fontSize: 12, color: AppColors.white),
+                          onPressed: () {},
+                          text: 'Follow',
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
               const Divider(),
               PostContainer(),

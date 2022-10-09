@@ -1,28 +1,38 @@
 import 'package:alsham_socialmedia/constants/app_colors.dart';
-import 'package:alsham_socialmedia/constants/paddings.dart';
-import 'package:alsham_socialmedia/views/components/post_container.dart';
+import 'package:alsham_socialmedia/controllers/landingpage_controller.dart';
+import 'package:alsham_socialmedia/views/pages/create_post_page.dart';
+import 'package:alsham_socialmedia/views/pages/home_page.dart';
+import 'package:alsham_socialmedia/views/pages/my_profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 
 class LandingPage extends StatelessWidget {
-  RxInt seveen = 0.obs;
   LandingPage({Key? key}) : super(key: key);
+  LandingPageController controller = Get.put(LandingPageController());
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Padding(
-          padding: Paddings.sidePadding,
-          child: PostContainer(),
-        ),
+        body: PageView(
+            controller: controller.pageController,
+            physics: const ScrollPhysics(
+              parent: NeverScrollableScrollPhysics(),
+            ),
+            children: const [
+              HomePage(),
+              CreatePostPage(),
+              MyProfilePage()
+            ]),
         bottomNavigationBar: Obx(
           () => BottomNavigationBar(
               onTap: (val) {
-                seveen.value = val;
+                controller.currentIndex.value = val;
+                controller.pageController
+                    .jumpToPage(controller.currentIndex.value);
               },
-              currentIndex: seveen.value,
+              currentIndex: controller.currentIndex.value,
               iconSize: 30,
               showUnselectedLabels: false,
               showSelectedLabels: false,

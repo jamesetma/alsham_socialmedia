@@ -15,10 +15,7 @@ class CreatePostPage extends StatelessWidget {
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.white,
-        leading: BackButton(
-          color: Colors.black,
-        ),
-        title: Text(
+        title: const Text(
           'Post',
           style: TextStyle(color: Colors.black),
         ),
@@ -28,8 +25,8 @@ class CreatePostPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 8),
+            const Padding(
+              padding: EdgeInsets.only(top: 8),
               child: Text('Select image'),
             ),
             ButtonBuilder(
@@ -38,16 +35,16 @@ class CreatePostPage extends StatelessWidget {
               onPressed: () {},
               color: AppColors.appPrimary,
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 8),
+            const Padding(
+              padding: EdgeInsets.only(top: 8),
               child: Text('Add caption'),
             ),
-            TextBoxBuilder(),
-            Padding(
-              padding: const EdgeInsets.only(top: 8),
+            const TextBoxBuilder(),
+            const Padding(
+              padding: EdgeInsets.only(top: 8),
               child: Text('Add hastags'),
             ),
-            TextFieldBuilder(),
+            const TextFieldBuilder(),
             Padding(
               padding: const EdgeInsets.only(top: 16),
               child: ButtonBuilder(
