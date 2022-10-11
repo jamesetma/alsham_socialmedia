@@ -26,8 +26,7 @@ class UsernamePage extends StatelessWidget {
           children: [
             const Text(
               'Select a Username',
-              style: TextStyle(
-                  fontSize: 16, fontWeight: FontWeight.w600),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
             ),
             const Text('Help secure your account'),
             const Text('Username'),
@@ -49,7 +48,7 @@ class UsernamePage extends StatelessWidget {
                     text: 'Done',
                     color: AppColors.appPrimary,
                     onPressed: () {
-                      Get.to(() => const WelcomePage());
+                      Get.to(() => WelcomePage());
                     },
                   ),
                 ),
