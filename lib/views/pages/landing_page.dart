@@ -27,10 +27,8 @@ class LandingPage extends StatelessWidget {
             ]),
         bottomNavigationBar: Obx(
           () => BottomNavigationBar(
-              onTap: (val) {
-                controller.currentIndex.value = val;
-                controller.pageController
-                    .jumpToPage(controller.currentIndex.value);
+              onTap: (index) {
+                controller.changeTabIndex(index);
               },
               currentIndex: controller.currentIndex.value,
               iconSize: 30,

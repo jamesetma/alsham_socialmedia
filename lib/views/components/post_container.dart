@@ -39,8 +39,8 @@ class PostContainer extends StatelessWidget {
             : SizedBox(
                 height: 30,
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(25),
-                  child: Image.network('', fit: BoxFit.cover),
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.network(imageLink!, fit: BoxFit.cover),
                 ),
               ),
         Row(
