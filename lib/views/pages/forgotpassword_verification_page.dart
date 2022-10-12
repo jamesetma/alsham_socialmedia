@@ -31,7 +31,7 @@ class ForgotPasswordVerificationPage extends StatelessWidget {
               PinCodeTextField(
                 enableActiveFill: true,
                 appContext: context,
-                length: 4,
+                length: 6,
                 animationType: AnimationType.fade,
                 onChanged: (val) {
                   Get.to(() {
@@ -41,8 +41,8 @@ class ForgotPasswordVerificationPage extends StatelessWidget {
                 pinTheme: PinTheme(
                   shape: PinCodeFieldShape.box,
                   borderRadius: BorderRadius.circular(10),
-                  fieldHeight: Get.height / 10,
-                  fieldWidth: Get.width / 5,
+                  fieldHeight: Get.height / 12,
+                  fieldWidth: Get.width / 8,
                   activeColor: AppColors.appPrimary,
                   inactiveColor: AppColors.appPrimary,
                   selectedColor: AppColors.appPrimary,
