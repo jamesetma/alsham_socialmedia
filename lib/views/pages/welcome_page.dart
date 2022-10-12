@@ -19,8 +19,7 @@ class WelcomePage extends StatelessWidget {
             children: [
               const Text(
                 'Welcome',
-                style: TextStyle(
-                    fontSize: 16, fontWeight: FontWeight.w600),
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
               ),
               SizedBox(
                 height: Get.height / 15,
@@ -28,7 +27,7 @@ class WelcomePage extends StatelessWidget {
               ButtonBuilder(
                 text: 'Continue',
                 onPressed: () {
-                  Get.to(() => LandingPage());
+                  Get.offAll(() => LandingPage());
                 },
                 color: AppColors.appPrimary,
               )

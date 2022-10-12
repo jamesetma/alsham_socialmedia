@@ -1,6 +1,8 @@
 import 'package:alsham_socialmedia/constants/app_colors.dart';
 import 'package:alsham_socialmedia/constants/paddings.dart';
 import 'package:alsham_socialmedia/views/components/button_builder.dart';
+import 'package:alsham_socialmedia/views/pages/forgot_password.dart';
+import 'package:alsham_socialmedia/views/pages/new_password_page.dart';
 import 'package:alsham_socialmedia/views/pages/personal_info_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -24,8 +26,7 @@ class ForgotPasswordVerificationPage extends StatelessWidget {
             children: [
               const Text(
                 'OTP sent',
-                style: TextStyle(
-                    fontWeight: FontWeight.w600, fontSize: 16),
+                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
               ),
               const Text('Enter the OTP sent to you'),
               PinCodeTextField(
@@ -61,7 +62,7 @@ class ForgotPasswordVerificationPage extends StatelessWidget {
                       text: 'Next',
                       textColor: AppColors.white,
                       onPressed: () {
-                        Get.to(() => PersonalInfoPage());
+                        Get.to(() => NewPasswordPage());
                       },
                     ),
                   ),

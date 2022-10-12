@@ -2,7 +2,9 @@ import 'package:alsham_socialmedia/constants/app_colors.dart';
 import 'package:alsham_socialmedia/constants/paddings.dart';
 import 'package:alsham_socialmedia/views/components/button_builder.dart';
 import 'package:alsham_socialmedia/views/components/textfield_builder.dart';
+import 'package:alsham_socialmedia/views/pages/verification_page.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ForgotPassword extends StatelessWidget {
   const ForgotPassword({Key? key}) : super(key: key);
@@ -42,7 +44,9 @@ class ForgotPassword extends StatelessWidget {
                   padding: EdgeInsets.only(bottom: 20),
                   child: ButtonBuilder(
                     color: AppColors.appPrimary,
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.to(() => VerificationPage());
+                    },
                     text: 'Done',
                   ),
                 ),
