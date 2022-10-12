@@ -15,7 +15,7 @@ class EditPage extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
-        leading: BackButton(
+        leading: const BackButton(
           color: Colors.black,
         ),
       ),

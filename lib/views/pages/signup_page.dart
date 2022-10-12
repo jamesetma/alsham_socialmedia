@@ -1,13 +1,15 @@
 import 'package:alsham_socialmedia/constants/app_colors.dart';
 import 'package:alsham_socialmedia/constants/paddings.dart';
+import 'package:alsham_socialmedia/controllers/auth_controller.dart';
+import 'package:alsham_socialmedia/controllers/signup_controller.dart';
 import 'package:alsham_socialmedia/views/components/button_builder.dart';
 import 'package:alsham_socialmedia/views/pages/verification_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SignupPage extends StatelessWidget {
-  const SignupPage({Key? key}) : super(key: key);
-
+  SignupController controller = Get.put(SignupController());
+  AuthController authController = Get.put(AuthController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,12 +32,16 @@ class SignupPage extends StatelessWidget {
             const Text('Enter your phone number'),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8),
-              child: TextFormField(
-                validator: (value) {},
-                decoration: InputDecoration(
-                  hintText: '+963 992 555 666',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
+              child: Form(
+                key: controller.numberKey,
+                child: TextFormField(
+                  controller: controller.numberController,
+                  validator: (value) {},
+                  decoration: InputDecoration(
+                    hintText: '+963 992 555 666',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
                 ),
               ),
@@ -50,7 +56,9 @@ class SignupPage extends StatelessWidget {
                     text: 'Next',
                     textColor: AppColors.white,
                     onPressed: () {
-                      Get.to(() => const VerificationPage());
+                      authController.phoneSignIn(
+                          controller.numberController.text, context);
+                      // Get.to(() => VerificationPage());
                     },
                   ),
                 ),

@@ -1,15 +1,13 @@
 import 'package:alsham_socialmedia/constants/app_colors.dart';
 import 'package:alsham_socialmedia/views/pages/landing_page.dart';
-import 'package:alsham_socialmedia/views/pages/login_page.dart';
-
-import 'package:alsham_socialmedia/views/pages/personal_info_page.dart';
 import 'package:alsham_socialmedia/views/pages/signup_page.dart';
-import 'package:alsham_socialmedia/views/pages/welcome_page.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
 
   runApp(const MyApp());
 }
@@ -21,7 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       theme: ThemeData(scaffoldBackgroundColor: AppColors.white),
-      home: LoginPage(),
+      home: SignupPage(),
     );
   }
 }

@@ -7,8 +7,7 @@ import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class VerificationPage extends StatelessWidget {
-  const VerificationPage({Key? key}) : super(key: key);
-
+  TextEditingController pinController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,20 +28,18 @@ class VerificationPage extends StatelessWidget {
               ),
               const Text('Enter the OTP sent to you'),
               PinCodeTextField(
+                enabled: true,
+                controller: pinController,
                 enableActiveFill: true,
                 appContext: context,
-                length: 4,
+                length: 6,
                 animationType: AnimationType.fade,
-                onChanged: (val) {
-                  Get.to(() {
-                    PersonalInfoPage();
-                  });
-                },
+                onChanged: (val) {},
                 pinTheme: PinTheme(
                   shape: PinCodeFieldShape.box,
                   borderRadius: BorderRadius.circular(10),
-                  fieldHeight: Get.height / 10,
-                  fieldWidth: Get.width / 5,
+                  fieldHeight: Get.height / 12,
+                  fieldWidth: Get.width / 8,
                   activeColor: AppColors.appPrimary,
                   inactiveColor: AppColors.appPrimary,
                   selectedColor: AppColors.appPrimary,
@@ -60,9 +57,7 @@ class VerificationPage extends StatelessWidget {
                       color: AppColors.appPrimary,
                       text: 'Next',
                       textColor: AppColors.white,
-                      onPressed: () {
-                        Get.to(() => PersonalInfoPage());
-                      },
+                      onPressed: () {},
                     ),
                   ),
                 ),

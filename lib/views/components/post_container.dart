@@ -1,6 +1,5 @@
 import 'package:alsham_socialmedia/constants/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 
 class PostContainer extends StatelessWidget {
