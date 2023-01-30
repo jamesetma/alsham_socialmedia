@@ -1,6 +1,7 @@
 import 'package:alsham_socialmedia/constants/app_colors.dart';
 import 'package:alsham_socialmedia/views/pages/landing_page.dart';
 import 'package:alsham_socialmedia/views/pages/signup_page.dart';
+import 'package:alsham_socialmedia/views/pages/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       theme: ThemeData(scaffoldBackgroundColor: AppColors.white),
-      home: SignupPage(),
+      home: SplashView(),
     );
   }
 }

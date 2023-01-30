@@ -1,5 +1,8 @@
+import 'package:alsham_socialmedia/controllers/splash_controller.dart';
+import 'package:alsham_socialmedia/customfullscreendialog.dart';
 import 'package:alsham_socialmedia/views/components/button_builder.dart';
 import 'package:alsham_socialmedia/views/pages/personal_info_page.dart';
+import 'package:alsham_socialmedia/views/pages/signup_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -11,63 +14,81 @@ class AuthController extends GetxController {
   TextEditingController codeController = TextEditingController();
   String? smsCode;
 
+  SplashController splashController = Get.put(SplashController());
+
   void phoneSignIn(String phoneNumber, BuildContext context) async {
-    await firebaseAuth.verifyPhoneNumber(
-        phoneNumber: phoneNumber,
-        verificationCompleted: (PhoneAuthCredential credential) async {
-          await firebaseAuth.signInWithCredential(credential);
-        },
-        verificationFailed: ((error) {
-          Get.snackbar('authentication error', error.message!);
-        }),
-        codeSent: ((String verificationId, int? resendToken) async {
-          // showModalBottomSheet(
-          //   isDismissible: false,
-          //   context: context,
-          //   builder: ((context) => VerificationBottomsheet(
-          //       pinController: pinController)),
-          // );
-          // // Get.to(() => VerificationPage());
-          // PhoneAuthCredential credential =
-          //     PhoneAuthProvider.credential(
-          //         verificationId: verifcationId,
-          //         smsCode: pinController.text.trim());
-          // await firebaseAuth.signInWithCredential(credential);
-          showDialog(
+    try {
+      await firebaseAuth.verifyPhoneNumber(
+          phoneNumber: phoneNumber,
+          verificationCompleted:
+              (PhoneAuthCredential credential) async {
+            CustomFullScreenDialog.showDialog();
+            await firebaseAuth.signInWithCredential(credential);
+            CustomFullScreenDialog.cancelDialog();
+          },
+          verificationFailed: ((error) {
+            Get.snackbar('authentication error', error.message!);
+          }),
+          codeSent: ((String verificationId, int? resendToken) async {
+            // showModalBottomSheet(
+            //   isDismissible: false,
+            //   context: context,
+            //   builder: ((context) => VerificationBottomsheet(
+            //       pinController: pinController)),
+            // );
+            // // Get.to(() => VerificationPage());
+            // PhoneAuthCredential credential =
+            //     PhoneAuthProvider.credential(
+            //         verificationId: verifcationId,
+            //         smsCode: pinController.text.trim());
+            // await firebaseAuth.signInWithCredential(credential);
+            showDialog(
               context: context,
               barrierDismissible: false,
               builder: (context) => AlertDialog(
-                    title: const Text("Enter SMS Code"),
-                    content: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        TextField(
-                          controller: codeController,
-                        ),
-                      ],
+                title: const Text("Enter SMS Code"),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    TextField(
+                      controller: codeController,
                     ),
-                    actions: <Widget>[
-                      ButtonBuilder(
-                        text: 'Done',
-                        onPressed: () {
-                          smsCode = codeController.text.trim();
+                  ],
+                ),
+                actions: <Widget>[
+                  ButtonBuilder(
+                    text: 'Done',
+                    onPressed: () {
+                      smsCode = codeController.text.trim();
 
-                          PhoneAuthCredential credential =
-                              PhoneAuthProvider.credential(
-                                  verificationId: verificationId,
-                                  smsCode: smsCode!);
-                          firebaseAuth
-                              .signInWithCredential(credential)
-                              .then((result) {
-                            Get.to(() => PersonalInfoPage());
-                          }).catchError((e) {
-                            debugPrint(e);
-                          });
-                        },
-                      )
-                    ],
-                  ));
-        }),
-        codeAutoRetrievalTimeout: (String verificationId) {});
+                      PhoneAuthCredential credential =
+                          PhoneAuthProvider.credential(
+                              verificationId: verificationId,
+                              smsCode: smsCode!);
+                      firebaseAuth
+                          .signInWithCredential(credential)
+                          .then((result) {
+                        splashController.choosePath();
+                      }).catchError((e) {
+                        debugPrint(e);
+                      });
+                    },
+                  )
+                ],
+              ),
+            );
+          }),
+          codeAutoRetrievalTimeout: (String verificationId) {});
+    } on FirebaseAuthException catch (e) {
+      printError(info: 'login error');
+    }
+  }
+
+  logout() async {
+    CustomFullScreenDialog.showDialog();
+    await firebaseAuth.signOut();
+    CustomFullScreenDialog.cancelDialog();
+    Get.offAll(() => SignupPage());
+    // Get.offAll(() => const SigninView());
   }
 }
