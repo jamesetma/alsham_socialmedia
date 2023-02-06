@@ -1,6 +1,11 @@
 import 'package:alsham_socialmedia/constants/app_colors.dart';
 import 'package:alsham_socialmedia/constants/paddings.dart';
 import 'package:alsham_socialmedia/views/components/button_builder.dart';
+<<<<<<< Updated upstream
+=======
+import 'package:alsham_socialmedia/views/pages/personal_info_page.dart';
+import 'package:alsham_socialmedia/views/pages/signup_page.dart';
+>>>>>>> Stashed changes
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
@@ -23,8 +28,7 @@ class VerificationPage extends StatelessWidget {
             children: [
               const Text(
                 'OTP sent',
-                style: TextStyle(
-                    fontWeight: FontWeight.w600, fontSize: 16),
+                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
               ),
               const Text('Enter the OTP sent to you'),
               PinCodeTextField(
@@ -56,6 +60,17 @@ class VerificationPage extends StatelessWidget {
                     ),
                   ),
                 ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Don\'t  have an account?'),
+                  TextButton(
+                      onPressed: () {
+                        Get.to(() => SignupPage());
+                      },
+                      child: Text('Sign Up')),
+                ],
               ),
             ],
           )),
