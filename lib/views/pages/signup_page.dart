@@ -16,7 +16,7 @@ class SignupPage extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: AppColors.white,
-        leading: const BackButton(color: Colors.black),
+        // leading: const BackButton(color: Colors.black),
       ),
       body: Padding(
         padding: Paddings.sidePadding,

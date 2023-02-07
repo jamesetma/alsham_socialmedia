@@ -21,7 +21,7 @@ class LandingPage extends StatelessWidget {
             physics: const ScrollPhysics(
               parent: NeverScrollableScrollPhysics(),
             ),
-            children: const [
+            children: [
               HomePage(),
               AnnouncementsPage(),
               ChatPage(),

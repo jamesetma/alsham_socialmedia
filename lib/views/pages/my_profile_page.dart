@@ -1,5 +1,6 @@
 import 'package:alsham_socialmedia/constants/app_colors.dart';
 import 'package:alsham_socialmedia/constants/paddings.dart';
+import 'package:alsham_socialmedia/controllers/auth_controller.dart';
 import 'package:alsham_socialmedia/views/components/button_builder.dart';
 import 'package:alsham_socialmedia/views/components/post_container.dart';
 import 'package:alsham_socialmedia/views/pages/edit_page.dart';
@@ -8,8 +9,7 @@ import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 
 class MyProfilePage extends StatelessWidget {
-  const MyProfilePage({super.key});
-
+  AuthController authController = Get.put(AuthController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,13 +35,15 @@ class MyProfilePage extends StatelessWidget {
                     SizedBox(
                       width: 12,
                     ),
-                    Text('Name'),
+                    Text('Seveen Shaheen'),
                   ]),
                   SizedBox(
                     // width: 25,
                     child: IconButton(
                       icon: const Icon(IconlyLight.setting),
-                      onPressed: () {},
+                      onPressed: () {
+                        authController.logout();
+                      },
                     ),
                   ),
                 ],
@@ -49,7 +51,7 @@ class MyProfilePage extends StatelessWidget {
               const Padding(
                 padding: EdgeInsets.only(bottom: 8),
                 child: Text(
-                  'hello my name is salah and I study computer engineering at the university',
+                  'hello my name is Seveen and I study computer engineering at the university',
                 ),
               ),
               SizedBox(
