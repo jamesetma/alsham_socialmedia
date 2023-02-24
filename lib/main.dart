@@ -1,5 +1,7 @@
+import 'package:alsham_socialmedia/chat/login.dart';
 import 'package:alsham_socialmedia/constants/app_colors.dart';
 import 'package:alsham_socialmedia/views/pages/landing_page.dart';
+import 'package:alsham_socialmedia/views/pages/login_page.dart';
 import 'package:alsham_socialmedia/views/pages/signup_page.dart';
 import 'package:alsham_socialmedia/views/pages/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -7,8 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  // WidgetsFlutterBinding.ensureInitialized();
+  // await Firebase.initializeApp();
 
   runApp(const MyApp());
 }
@@ -20,7 +22,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       theme: ThemeData(scaffoldBackgroundColor: AppColors.white),
-      home: SplashView(),
+      home: LoginChat(),
     );
   }
 }

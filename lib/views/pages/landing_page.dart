@@ -1,6 +1,7 @@
 import 'package:alsham_socialmedia/constants/app_colors.dart';
 import 'package:alsham_socialmedia/controllers/landingpage_controller.dart';
 import 'package:alsham_socialmedia/views/pages/announcements_page.dart';
+import 'package:alsham_socialmedia/views/pages/chat_channels_page.dart';
 import 'package:alsham_socialmedia/views/pages/chat_page.dart';
 import 'package:alsham_socialmedia/views/pages/home_page.dart';
 import 'package:alsham_socialmedia/views/pages/my_profile_page.dart';
@@ -24,7 +25,7 @@ class LandingPage extends StatelessWidget {
             children: [
               HomePage(),
               AnnouncementsPage(),
-              ChatPage(),
+              ChatChannelPage(),
               MyProfilePage()
             ]),
         bottomNavigationBar: Obx(

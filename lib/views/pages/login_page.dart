@@ -1,5 +1,6 @@
 import 'package:alsham_socialmedia/constants/app_colors.dart';
 import 'package:alsham_socialmedia/constants/paddings.dart';
+import 'package:alsham_socialmedia/controllers/auth_controller.dart';
 import 'package:alsham_socialmedia/views/components/button_builder.dart';
 import 'package:alsham_socialmedia/views/components/textfield_builder.dart';
 import 'package:alsham_socialmedia/views/pages/forgot_password.dart';
@@ -8,8 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
-
+  LoginPage({super.key});
+  final AuthController auth = Get.put(AuthController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,20 +26,22 @@ class LoginPage extends StatelessWidget {
           children: [
             const Text(
               'Sign In',
-              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+              style: TextStyle(
+                  fontWeight: FontWeight.w600, fontSize: 16),
             ),
             const Text('Enter your credentials'),
             const Padding(
               padding: EdgeInsets.only(top: 8.0),
               child: Text('Username'),
             ),
-            const TextFieldBuilder(),
+            TextFieldBuilder(controller: auth.username),
             const Padding(
               padding: EdgeInsets.only(top: 8.0),
               child: Text('Password'),
             ),
-            const TextFieldBuilder(
+            TextFieldBuilder(
               obsecureText: true,
+              controller: auth.password,
             ),
             Align(
               alignment: Alignment.centerRight,
@@ -58,7 +61,7 @@ class LoginPage extends StatelessWidget {
                     text: 'Sign In',
                     color: AppColors.appPrimary,
                     onPressed: () {
-                      Get.to(() => WelcomeBackPage());
+                      auth.login();
                     },
                   ),
                 ),

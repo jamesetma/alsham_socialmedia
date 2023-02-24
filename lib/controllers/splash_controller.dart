@@ -1,6 +1,6 @@
 import 'package:alsham_socialmedia/views/pages/landing_page.dart';
+import 'package:alsham_socialmedia/views/pages/login_page.dart';
 import 'package:alsham_socialmedia/views/pages/personal_info_page.dart';
-import 'package:alsham_socialmedia/views/pages/signup_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -20,7 +20,7 @@ class SplashController extends GetxController {
   void handleAuthStateChanged(isLoggedIn) async {
     if (isLoggedIn == false) {
       // ignore: prefer_const_constructors
-      Get.offAll(() => SignupPage());
+      Get.offAll(() => LoginPage());
       return;
     }
     try {

@@ -16,6 +16,9 @@ dependencies:
   iconly: ^1.0.1
   cupertino_icons: ^1.0.2
   image_picker: ^0.8.6
+  http: ^0.13.5
+  sendbird_sdk: ^3.2.6
+  dash_chat: ^1.1.16
 
   # firebase packages
   firebase_core: ^1.17.1

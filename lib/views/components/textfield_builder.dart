@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 class TextFieldBuilder extends StatelessWidget {
   final bool? obsecureText;
   final Icon? prefixIcon;
+  final TextEditingController? controller;
   const TextFieldBuilder({
     Key? key,
     this.obsecureText,
     this.prefixIcon,
+    this.controller,
   }) : super(key: key);
 
   @override
@@ -15,6 +17,7 @@ class TextFieldBuilder extends StatelessWidget {
     return SizedBox(
       height: 50,
       child: TextFormField(
+        controller: controller,
         obscureText: obsecureText ?? false,
         decoration: InputDecoration(
           prefixIcon: prefixIcon,
