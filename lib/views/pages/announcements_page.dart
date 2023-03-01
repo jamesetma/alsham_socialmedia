@@ -1,5 +1,4 @@
-import 'dart:ffi';
-
+import 'package:alsham_socialmedia/controllers/auth_controller.dart';
 import 'package:alsham_socialmedia/controllers/student_controller.dart';
 import 'package:alsham_socialmedia/controllers/user_controller.dart';
 import 'package:alsham_socialmedia/views/components/textfield_builder.dart';
@@ -7,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AnnouncementsPage extends StatelessWidget {
-  final StudentsController controller = Get.put(StudentsController());
+  final AuthController controller = Get.put(AuthController());
   TextEditingController studentId = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -32,10 +31,10 @@ class AnnouncementsPage extends StatelessWidget {
             controller: controller.studentUniNumber,
             prefixIcon: Icon(Icons.numbers),
           ),
-          TextFieldBuilder(
-            controller: studentId,
-            prefixIcon: Icon(Icons.abc),
-          ),
+          // TextFieldBuilder(
+          //   controller: studentId,
+          //   prefixIcon: Icon(Icons.abc),
+          // ),
           ElevatedButton(
               onPressed: () {
                 controller.createStudent();

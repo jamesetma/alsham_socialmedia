@@ -4,7 +4,6 @@ import 'package:alsham_socialmedia/controllers/auth_controller.dart';
 import 'package:alsham_socialmedia/views/components/button_builder.dart';
 import 'package:alsham_socialmedia/views/components/textfield_builder.dart';
 import 'package:alsham_socialmedia/views/pages/forgot_password.dart';
-import 'package:alsham_socialmedia/views/pages/welcomeback_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

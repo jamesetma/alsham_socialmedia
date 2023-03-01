@@ -25,7 +25,7 @@ class LandingPage extends StatelessWidget {
             children: [
               HomePage(),
               AnnouncementsPage(),
-              ChatChannelPage(),
+              Basic(),
               MyProfilePage()
             ]),
         bottomNavigationBar: Obx(

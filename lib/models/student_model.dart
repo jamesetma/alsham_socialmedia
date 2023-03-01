@@ -9,7 +9,7 @@ String studentModelToJson(Map<String, StudentModel> data) =>
         .map((k, v) => MapEntry<String, dynamic>(k, v.toJson())));
 
 class StudentModel {
-  int? studentId;
+  int? userId;
   String? studentName;
   String? universityNumber;
   String? academicYear;
@@ -17,7 +17,7 @@ class StudentModel {
   String? biography;
 
   StudentModel(
-      {this.studentId,
+      {this.userId,
       this.studentName,
       this.universityNumber,
       this.academicYear,
@@ -25,7 +25,7 @@ class StudentModel {
       this.biography});
 
   StudentModel.fromJson(Map<String, dynamic> json) {
-    studentId = json['student_id'];
+    userId = json['userID'];
     studentName = json['student_name'];
     universityNumber = json['university_number'];
     academicYear = json['academic_year'];
@@ -35,7 +35,7 @@ class StudentModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['student_id'] = studentId;
+    data['userID'] = userId;
     data['student_name'] = studentName;
     data['university_number'] = universityNumber;
     data['academic_year'] = academicYear;

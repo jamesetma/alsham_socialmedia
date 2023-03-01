@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:alsham_socialmedia/models/student_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
@@ -22,13 +24,32 @@ class ApiService {
     }
   }
 
+  Future<StudentModel> getCurrentStudent(String id) async {
+    var res = await client
+        .get(
+      Uri.parse('$hostname$url$id'),
+    )
+        .then((response) {
+      if (response.statusCode == 200) {
+        // print(response.body);
+        var jsonString = response.body;
+        var student = studentModelFromJson(jsonString);
+        return student[0];
+      } else
+        print(response.body);
+      throw -1;
+    });
+    return res;
+  }
+
   Future<http.Response> createStudent() async {
     var response =
         await client.post(Uri.parse(hostname + url), body: body);
     if (response.statusCode == 201) {
       debugPrint('Successfully uploaded to database');
-    } else
+    } else {
       debugPrint(response.statusCode.toString());
+    }
     return response;
   }
 

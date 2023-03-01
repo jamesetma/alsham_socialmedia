@@ -15,16 +15,17 @@ dependencies:
   pin_code_fields: ^7.4.0
   iconly: ^1.0.1
   cupertino_icons: ^1.0.2
-  image_picker: ^0.8.6
   http: ^0.13.5
-  sendbird_sdk: ^3.2.6
-  dash_chat: ^1.1.16
+  # platform_device_id: ^1.0.1
+  # url_strategy: ^0.2.0
+  # shared_preferences: ^2.0.15
+  # device_info_plus: ^4.0.1
 
-  # firebase packages
-  firebase_core: ^1.17.1
-  firebase_auth: ^3.3.19
-  cloud_firestore: ^3.1.17
-  firebase_storage: ^10.2.18
+  # pubnub: ^4.2.2
+
+  # sendbird_sdk: ^3.2.6
+  dash_chat_2: ^0.0.15
+  socket_io_client: ^2.0.1
 
 dev_dependencies:
   flutter_test:
