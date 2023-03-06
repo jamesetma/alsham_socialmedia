@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 
 import 'package:dash_chat_2/dash_chat_2.dart';
 
@@ -11,6 +12,7 @@ class MessageModel {
   String? user;
   String? uid;
   String? message;
+
   int? created;
 
   MessageModel(

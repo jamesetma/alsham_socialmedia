@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class TextBoxBuilder extends StatelessWidget {
-  const TextBoxBuilder({
-    Key? key,
-  }) : super(key: key);
+  const TextBoxBuilder({Key? key, this.controller}) : super(key: key);
 
+  final TextEditingController? controller;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: Get.height / 5,
       child: TextFormField(
+        controller: controller,
         expands: true,
         maxLines: null,
         decoration: InputDecoration(

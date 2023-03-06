@@ -16,6 +16,13 @@ dependencies:
   iconly: ^1.0.1
   cupertino_icons: ^1.0.2
   http: ^0.13.5
+  timezone: ^0.9.1
+  instant: ^0.5.1
+  supabase: ^1.6.0
+  file_picker: ^5.2.5
+  permission_handler: ^10.2.0
+  file_saver: ^0.1.1
+
   # platform_device_id: ^1.0.1
   # url_strategy: ^0.2.0
   # shared_preferences: ^2.0.15
@@ -26,6 +33,7 @@ dependencies:
   # sendbird_sdk: ^3.2.6
   dash_chat_2: ^0.0.15
   socket_io_client: ^2.0.1
+  syncfusion_flutter_xlsio: ^20.4.52-beta
 
 dev_dependencies:
   flutter_test:

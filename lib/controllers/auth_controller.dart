@@ -16,39 +16,46 @@ class AuthController extends GetxController {
   RxList<StudentModel> listStudentModels = <StudentModel>[].obs;
   var studentModel = StudentModel().obs;
   Map account = {};
+  late TextEditingController studentName;
+  late TextEditingController studentUniNumber;
+  late TextEditingController studentAcademicYear;
+  late TextEditingController studentPhone;
+  late TextEditingController studentBiography;
+  late TextEditingController username;
+  late TextEditingController password;
   @override
-  TextEditingController studentName = TextEditingController();
-  TextEditingController studentUniNumber = TextEditingController();
-  TextEditingController studentAcademicYear = TextEditingController();
-  TextEditingController studentPhone = TextEditingController();
-  TextEditingController studentBiography = TextEditingController();
-  TextEditingController username = TextEditingController();
-  TextEditingController password = TextEditingController();
-  late String body;
+  void onInit() {
+    studentName = TextEditingController();
+    studentUniNumber = TextEditingController();
+    studentAcademicYear = TextEditingController();
+    studentPhone = TextEditingController();
+    studentBiography = TextEditingController();
+    username = TextEditingController();
+    password = TextEditingController();
+    // fetchStudents();
+    super.onInit();
+  }
 
-  // SplashController splashController = Get.put(SplashController());
+  late String body;
 
   login() async {
     try {
+      // print(username.text + password.text);
       ApiService api = ApiService(
           url: 'auth/',
-          body: (<String, String>{
+          body: ({
             "username": username.text,
             "password": password.text
           }));
       return api.loginStudent().then((value) {
-        json.decode(
-          value.body,
-          reviver: (key, value) => account.addAll({key: value}),
-        );
-
-        // List<AccountModel> acc = AccountModelFromJson(body);
-        print(account['userID']);
+        // print(value.body);
         if (value.statusCode == 200) {
           Get.offAll(() => LandingPage());
-        } else {
-          print('ERROR');
-          print(body);
+          json.decode(
+            value.body,
+            reviver: (key, value) => account.addAll({key: value}),
+          );
+          // print(account["accessToken"]);
         }
       });
     } catch (e) {
@@ -82,6 +89,7 @@ class AuthController extends GetxController {
   Future<StudentModel> getStudent() async {
     print("the user id is ${account['userID']}");
     ApiService api = ApiService(
+      accessToken: account["accessToken"],
       url: 'students/id?id=',
     );
     return await api
@@ -90,29 +98,16 @@ class AuthController extends GetxController {
   }
 
   void fetchStudents() async {
-    HttpConnect request = HttpConnect(url: "students/");
-    await request.list().then((value) {
-      if (value.statusCode == 200) {
-        final responseJson = jsonDecode(value.body);
-        List jsonResponse = responseJson;
-        listStudentModels.value = jsonResponse
-            .map((e) => StudentModel.fromJson(e))
-            .toList();
-        print("LIST");
-        print(body);
-      } else {
-        print('LIST ERROR');
-      }
-    }).catchError((onError) {
-      printError();
-    });
+    ApiService api = ApiService(url: "students/");
+    listStudentModels.value = await api.fetchStudents();
   }
 
   void deleteStudent(int id) async {
-    HttpConnect request = HttpConnect(
-        url: 'students/',
-        body: jsonEncode(<String, int>{"userID": account['userID']}));
-    await request.delete().then((value) {
+    ApiService api = ApiService(
+      url: 'students/',
+      body: (<String, int>{"userID": account['userID']}),
+    );
+    await api.deleteStudent().then((value) {
       bodie = jsonDecode(value.body);
       if (value.statusCode == 201) {
         print("DELETE");
@@ -127,40 +122,39 @@ class AuthController extends GetxController {
   }
 
   void editStudent(int id) async {
-    HttpConnect request = HttpConnect(
-      url: 'students/',
-      body: jsonEncode(
-        <String, dynamic>{
-          studentName.text.isNotEmpty
-              ? "student_name"
-              : studentName.text: null,
-          studentUniNumber.text.isNotEmpty
-              ? "university_number"
-              : studentUniNumber.text: null,
-          studentAcademicYear.text.isNotEmpty
-              ? "academic_year"
-              : studentAcademicYear.text: null,
-          studentPhone.text.isNotEmpty ? "phone" : studentPhone.text:
-              null,
-          studentBiography.text.isNotEmpty
-              ? "biography"
-              : studentBiography.text: null
-        },
-      ),
-    );
-
-    request.edit().then((value) {
-      bodie = jsonDecode(value.body);
-      if (value.statusCode == 200) {
-        print("EDIT");
-        print(bodie);
-        Get.back();
-      } else {
-        print('EDIT ERROR');
-      }
-    }).catchError((onError) {
-      printError();
+    Map<String, dynamic> map = <String, dynamic>{
+      "userID": json.encode(id),
+      "student_name": studentName.text,
+      "academic_year": studentAcademicYear.text,
+      "phone": studentPhone.text,
+      "biography": studentBiography.text
+    };
+    ApiService api = ApiService(
+        url: 'students/',
+        body: mapToQuery(map, encoding: utf8),
+        accessToken: account['accessToken']);
+    print(mapToQuery(map, encoding: utf8).toString());
+    api.editStudent().whenComplete(() {
+      update(['myProfile']);
+      getStudent();
+    }).catchError((e) {
+      throw e;
     });
+  }
+
+  mapToQuery(Map<String, dynamic> map, {required Encoding encoding}) {
+    map.keys
+        .where((k) => (map[k] == null || map[k] == ''))
+        .toList() // -- keys for null elements
+        .forEach(map.remove);
+
+    // var pairs = <List<String>>[];
+    // map.forEach((key, value) => pairs.add([
+    //       Uri.encodeQueryComponent(key, encoding: encoding),
+    //       Uri.encodeQueryComponent(value, encoding: encoding)
+    //     ]));
+
+    return map;
   }
 
   void createStudent() async {

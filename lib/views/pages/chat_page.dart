@@ -1,6 +1,8 @@
 import 'package:alsham_socialmedia/controllers/auth_controller.dart';
 import 'package:alsham_socialmedia/controllers/chat_controller.dart';
 import 'package:dash_chat_2/dash_chat_2.dart';
+import 'package:intl/date_symbol_data_local.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,6 +15,12 @@ ChatController chat = Get.put(ChatController());
 AuthController auth = Get.find<AuthController>();
 
 class _BasicState extends State<Basic> {
+  @override
+  void initState() {
+    super.initState();
+    initializeDateFormatting();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,8 +41,9 @@ class _BasicState extends State<Basic> {
             });
           },
 
-          // messageOptions: MessageOptions(),
-          // messageListOptions: MessageListOptions(),
+          messageOptions: MessageOptions(showTime: true),
+          // messageListOptions:
+          // MessageListOptions(dateSeparatorFormat:  ),
           // inputOptions: InputOptions(),
           // ignore: invalid_use_of_protected_member
           messages: chat.messagesList.value,

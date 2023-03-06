@@ -1,19 +1,22 @@
 import 'dart:convert';
 
+import 'package:alsham_socialmedia/constants/urls.dart';
 import 'package:alsham_socialmedia/models/student_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
 class ApiService {
   final String url;
-  final body;
-  static String hostname = 'http://192.168.1.107:3500/';
+  final dynamic body;
+  final String? accessToken;
+  static String hostname = URLS.apiURL2;
   static var client = http.Client();
 
-  ApiService({required this.url, this.body});
+  ApiService({required this.url, this.body, this.accessToken});
 
   Future<List<StudentModel>> fetchStudents() async {
-    var response = await client.get(Uri.parse(hostname + url));
+    var response = await client.get(Uri.parse(hostname + url),
+        headers: ({"authorization": accessToken!}));
     if (response.statusCode == 200) {
       var jsonString = response.body;
 
@@ -25,26 +28,25 @@ class ApiService {
   }
 
   Future<StudentModel> getCurrentStudent(String id) async {
-    var res = await client
-        .get(
-      Uri.parse('$hostname$url$id'),
-    )
-        .then((response) {
+    var res = await client.get(Uri.parse('$hostname$url$id'),
+        headers: {"authorization": accessToken!}).then((response) {
       if (response.statusCode == 200) {
         // print(response.body);
         var jsonString = response.body;
         var student = studentModelFromJson(jsonString);
         return student[0];
-      } else
+      } else {
+        print(response.statusCode);
         print(response.body);
-      throw -1;
+        throw -1;
+      }
     });
     return res;
   }
 
   Future<http.Response> createStudent() async {
-    var response =
-        await client.post(Uri.parse(hostname + url), body: body);
+    var response = await client.post(Uri.parse(hostname + url),
+        body: body, headers: ({"authorization": accessToken!}));
     if (response.statusCode == 201) {
       debugPrint('Successfully uploaded to database');
     } else {
@@ -54,18 +56,19 @@ class ApiService {
   }
 
   Future<http.Response> editStudent() async {
-    var response =
-        await client.put(Uri.parse(hostname + url), body: body);
+    var response = await client.put(Uri.parse(hostname + url),
+        body: body, headers: {"authorization": accessToken!});
     if (response.statusCode == 201) {
       debugPrint('Successfully updated in database');
-    } else
+    } else {
       debugPrint(response.statusCode.toString());
+    }
     return response;
   }
 
   Future<http.Response> deleteStudent() async {
-    var response =
-        await client.delete(Uri.parse(hostname + url), body: body);
+    var response = await client.delete(Uri.parse(hostname + url),
+        body: body, headers: {"authorization": accessToken!});
     if (response.statusCode == 201) {
       debugPrint('Successfully deleted student in database');
     } else
@@ -80,7 +83,7 @@ class ApiService {
     if (response.statusCode == 200) {
       debugPrint('Successfully Logged in');
     } else
-      debugPrint(response.statusCode.toString());
+      debugPrint(response.statusCode.toString() + "error logging in");
     return response;
   }
 

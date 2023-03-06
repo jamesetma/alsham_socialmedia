@@ -1,10 +1,11 @@
 import 'package:alsham_socialmedia/constants/app_colors.dart';
 import 'package:alsham_socialmedia/controllers/landingpage_controller.dart';
+import 'package:alsham_socialmedia/views/pages/all_chats_page.dart';
 import 'package:alsham_socialmedia/views/pages/announcements_page.dart';
-import 'package:alsham_socialmedia/views/pages/chat_channels_page.dart';
-import 'package:alsham_socialmedia/views/pages/chat_page.dart';
 import 'package:alsham_socialmedia/views/pages/home_page.dart';
+import 'package:alsham_socialmedia/views/pages/lectures_page.dart';
 import 'package:alsham_socialmedia/views/pages/my_profile_page.dart';
+import 'package:alsham_socialmedia/views/pages/upload_lectures_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
@@ -25,7 +26,8 @@ class LandingPage extends StatelessWidget {
             children: [
               HomePage(),
               AnnouncementsPage(),
-              Basic(),
+              LecturesPage(),
+              AllChatsPage(),
               MyProfilePage()
             ]),
         bottomNavigationBar: Obx(
@@ -49,6 +51,11 @@ class LandingPage extends StatelessWidget {
                   label: 'Announcments',
                   icon: Icon(IconlyLight.notification),
                   activeIcon: Icon(IconlyBold.notification),
+                ),
+                BottomNavigationBarItem(
+                  label: 'Lectures',
+                  icon: Icon(IconlyLight.bookmark),
+                  activeIcon: Icon(IconlyBold.bookmark),
                 ),
                 BottomNavigationBarItem(
                   label: 'Chat',

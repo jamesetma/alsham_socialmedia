@@ -1,9 +1,12 @@
+import 'dart:convert';
+import 'package:alsham_socialmedia/constants/urls.dart';
 import 'package:alsham_socialmedia/controllers/auth_controller.dart';
 import 'package:alsham_socialmedia/models/message_model.dart';
 import 'package:alsham_socialmedia/models/student_model.dart';
 import 'package:dash_chat_2/dash_chat_2.dart';
 import 'package:get/get.dart';
 import 'package:socket_io_client/socket_io_client.dart' as io;
+import 'package:instant/instant.dart';
 
 class ChatController extends GetxController {
   late io.Socket socket;
@@ -11,17 +14,14 @@ class ChatController extends GetxController {
 
   AuthController auth = Get.find<AuthController>();
 
-  // ChatUser user2 = ChatUser(
-  //   id: '4',
-  //   firstName: 'mom',
-  // );
   late StudentModel student;
-  // late var myChat =
-  //     ChatMessage(user: user, createdAt: convertTimeStamp(2321));
+  late DateTime estTime;
 
   ChatUser user = ChatUser(id: '1');
   @override
   void onInit() async {
+    estTime = curDateTimeByZone(zone: "PDT");
+
     initSocket();
     student = await auth.getStudent();
 
@@ -38,7 +38,8 @@ class ChatController extends GetxController {
   initSocket() {
     try {
       List<MessageModel> msgs;
-      socket = io.io('http://192.168.1.107:3500',
+
+      socket = io.io(URLS.apiURL2,
           io.OptionBuilder().setTransports(['websocket']).build());
       socket.connect();
 
@@ -48,26 +49,34 @@ class ChatController extends GetxController {
 
       socket.on("messages", (messages) {
         print("****************" + messages.toString());
-        msgs = MessageModelFromJson(messages.toString());
+        var json = jsonEncode(messages);
+        msgs = MessageModelFromJson(json);
         for (int i = 0; i < msgs.length; i++) {
           messagesList.add(
             ChatMessage(
-              user:
-                  ChatUser(id: msgs[i].uid!, firstName: msgs[i].user),
-              text: msgs[i].message ?? 'hey',
-              createdAt: convertTimeStamp(
-                msgs[i].created!,
-              ),
-            ),
+                user: ChatUser(
+                    id: msgs[i].uid!, firstName: msgs[i].user),
+                text: msgs[i].message ?? 'hey',
+                createdAt: DateTime.now()),
           );
         }
       });
 
       socket.on("message", (message) {
-        print("###########" + message.toString());
+        var json = jsonEncode(message);
+        Map<String, dynamic> map = jsonDecode(json);
+        MessageModel msgModel = MessageModel.fromJson(map);
+
+        ChatMessage msg = ChatMessage(
+            user:
+                ChatUser(id: msgModel.uid!, firstName: msgModel.user),
+            createdAt: DateTime.now(),
+            text: msgModel.message!);
+        messagesList.add(msg);
+
+        print('sent message successfully!');
       });
       socket.onConnect((_) {
-        // openUsernameDialog();
         print('connection established');
       });
     } catch (e) {
