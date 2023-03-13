@@ -6,7 +6,6 @@ import 'package:alsham_socialmedia/views/pages/landing_page.dart';
 import 'package:alsham_socialmedia/views/pages/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
@@ -71,7 +70,7 @@ class AuthController extends GetxController {
         // body = value.body;
 
         if (value.statusCode == 200) {
-          Get.offAll(() => LandingPage());
+          // Get.offAll(() => LandingPage());
           return value;
         } else {
           print('ERROR');

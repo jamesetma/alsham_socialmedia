@@ -22,12 +22,11 @@ class PostContainer extends StatelessWidget {
         color: AppColors.gray,
         borderRadius: BorderRadius.circular(10),
       ),
-      child: Column(mainAxisSize: MainAxisSize.min, children: [
+      child: Column(mainAxisSize: MainAxisSize.max, children: [
         Row(
           children: [
-            CircleAvatar(
-              backgroundImage: null,
-            ),
+            const CircleAvatar(
+                backgroundImage: AssetImage('assets/images/1.jpg')),
             const SizedBox(
               width: 8,
             ),
@@ -39,7 +38,10 @@ class PostContainer extends StatelessWidget {
         const SizedBox(height: 10),
         Align(
           alignment: Alignment.centerLeft,
-          child: Text(caption, softWrap: true),
+          child: Text(
+            caption,
+            softWrap: true,
+          ),
         ),
         imageLink == null
             ? const SizedBox()

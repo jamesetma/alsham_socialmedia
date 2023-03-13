@@ -170,7 +170,7 @@ class StudentController extends GetxController {
       "phone": studentPhone.text,
       'academic_year': studentAcademicYear.text,
       "university_number": studentUniNumber.text,
-      "userID": jsonEncode(id),
+      "userID": id,
     });
 
     ApiService api = ApiService(

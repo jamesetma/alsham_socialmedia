@@ -61,9 +61,9 @@ class AnnouncementsPage extends StatelessWidget {
                         : controller
                             .filteredAnnouncements[index].username!,
                     caption: studentController.isAdmin() == true
-                        ? controller.announcements[index].username!
+                        ? controller.announcements[index].text!
                         : controller
-                            .filteredAnnouncements[index].username!,
+                            .filteredAnnouncements[index].text!,
                   ),
                   const Divider()
                 ]);

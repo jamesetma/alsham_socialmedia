@@ -33,7 +33,14 @@ class ChatController extends GetxController {
         receiverId, auth.account['userID'].toString());
     await getUserMessages(
         auth.account['userID'].toString(), receiverId);
+    // AwesomeNotifications().createNotification(
+    //   content: NotificationContent(
+    //       id: 1,
+    //       channelKey: "basic_channel",
+    //       title: "Seveen",
+    //       body: "message"));
     timer = Timer.periodic(const Duration(seconds: 2), (t) async {
+      // AwesomeNotifications().setListeners(onActionReceivedMethod: )
       await getUserMessages(
           receiverId, auth.account['userID'].toString());
     });

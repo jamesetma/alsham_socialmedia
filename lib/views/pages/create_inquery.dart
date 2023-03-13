@@ -1,6 +1,7 @@
 import 'package:alsham_socialmedia/constants/app_colors.dart';
 import 'package:alsham_socialmedia/constants/paddings.dart';
 import 'package:alsham_socialmedia/controllers/announcements_controller.dart';
+import 'package:alsham_socialmedia/controllers/inqueries_controller.dart';
 import 'package:alsham_socialmedia/controllers/student_controller.dart';
 import 'package:alsham_socialmedia/controllers/tag_controller.dart';
 import 'package:alsham_socialmedia/views/components/button_builder.dart';
@@ -8,16 +9,16 @@ import 'package:alsham_socialmedia/views/components/textbox_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CreatePostPage extends StatefulWidget {
-  const CreatePostPage({super.key});
+class CreateInqueriesPage extends StatefulWidget {
+  const CreateInqueriesPage({super.key});
 
   @override
-  State<CreatePostPage> createState() => _CreatePostPageState();
+  State<CreateInqueriesPage> createState() =>
+      _CreateInqueriesPageState();
 }
 
-class _CreatePostPageState extends State<CreatePostPage> {
-  AnnouncementsController controller =
-      Get.find<AnnouncementsController>();
+class _CreateInqueriesPageState extends State<CreateInqueriesPage> {
+  InqueriesController controller = Get.find<InqueriesController>();
   TagController tag = Get.find<TagController>();
 
   StudentController studentController = Get.find<StudentController>();
@@ -81,7 +82,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
               child: ButtonBuilder(
                 onPressed: () async {
                   await controller
-                      .postAnnouncement()
+                      .postinquery()
                       .then((i) => Get.back());
                 },
                 color: AppColors.appPrimary,

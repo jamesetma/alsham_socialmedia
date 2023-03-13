@@ -59,7 +59,7 @@ class PersonalInfoPage extends StatelessWidget {
                   obsecureText: true,
                   controller: auth.password,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 const Text(
@@ -102,6 +102,7 @@ class PersonalInfoPage extends StatelessWidget {
                             text: 'Done',
                             color: AppColors.appPrimary,
                             onPressed: () async {
+                              // if(controller.key1.currentState.validate)
                               Map user = {};
                               await auth.signup().then((value) async {
                                 controller.createStudent(await json
@@ -110,7 +111,7 @@ class PersonalInfoPage extends StatelessWidget {
                                   user.addAll({k: v});
                                   print(user['userID']);
                                   return user['userID'];
-                                }));
+                                }).toString());
                               });
                             },
                           ),

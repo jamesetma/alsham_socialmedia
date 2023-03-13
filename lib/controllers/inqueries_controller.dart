@@ -45,6 +45,7 @@ class InqueriesController extends GetxController {
 
   Future getInqueries() async {
     filteredInqueries.clear();
+
     ApiService api = ApiService(
         url: "inqueries/", accessToken: auth.account['accessToken']);
     newAnns = await api.fetchInqueries();
@@ -72,6 +73,8 @@ class InqueriesController extends GetxController {
   }
 
   Future postinquery() async {
+    selectedTag = tagController.tags.firstWhere(
+        (element) => element.tagDescr == studentController.tagName);
     print(caption.text);
     ApiService api = ApiService(
       url: 'inqueries/',
@@ -80,7 +83,7 @@ class InqueriesController extends GetxController {
         "text": caption.text,
         "media_link": '',
         "sender_id": auth.account["userID"].toString(),
-        "tag_id": selectedTag.tagId,
+        "tag_id": selectedTag.tagId?.toString() ?? "1",
       },
     );
     await api.create();

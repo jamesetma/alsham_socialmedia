@@ -6,6 +6,7 @@ import 'package:alsham_socialmedia/models/student_model.dart';
 import 'package:alsham_socialmedia/models/student_subject_model.dart';
 import 'package:alsham_socialmedia/views/components/button_builder.dart';
 import 'package:alsham_socialmedia/views/pages/edit_page.dart';
+import 'package:alsham_socialmedia/views/pages/login_page.dart';
 import 'package:alsham_socialmedia/views/pages/personal_info_page.dart';
 import 'package:alsham_socialmedia/views/pages/signup_page.dart';
 import 'package:flutter/material.dart';
@@ -35,6 +36,10 @@ class _MyProfilePageState extends State<MyProfilePage> {
                   color: Colors.black,
                   icon: Icon(Icons.add),
                 ),
+          IconButton(
+              onPressed: () => Get.offAll(LoginPage()),
+              color: Colors.black,
+              icon: Icon(Icons.logout))
         ],
         backgroundColor: AppColors.white,
         elevation: 0,
@@ -61,8 +66,10 @@ class _MyProfilePageState extends State<MyProfilePage> {
                                 CrossAxisAlignment.start,
                             children: [
                               ListTile(
-                                leading:
-                                    const CircleAvatar(radius: 30),
+                                leading: const CircleAvatar(
+                                    radius: 30,
+                                    backgroundImage: AssetImage(
+                                        'assets/images/1.jpg')),
                                 title: Text(student.studentName!),
                                 subtitle: controller.isAdmin() == true
                                     ? SizedBox()

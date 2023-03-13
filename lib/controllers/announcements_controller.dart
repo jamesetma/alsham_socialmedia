@@ -80,7 +80,10 @@ class AnnouncementsController extends GetxController {
   }
 
   Future postAnnouncement() async {
+    selectedTag = tagController.tags.firstWhere(
+        (element) => element.tagDescr == studentController.tagName);
     print(caption.text);
+    print(selectedTag.tagId);
     ApiService api = ApiService(
       url: 'announcments/',
       accessToken: auth.account['accessToken'],
@@ -88,7 +91,7 @@ class AnnouncementsController extends GetxController {
         "text": caption.text,
         "media_link": '',
         "sender_id": auth.account["userID"].toString(),
-        "tag_id": selectedTag.tagId,
+        "tag_id": selectedTag.tagId?.toString() ?? "1",
       },
     );
     await api.create();
