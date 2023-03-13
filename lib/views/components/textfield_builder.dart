@@ -5,11 +5,13 @@ class TextFieldBuilder extends StatelessWidget {
   final bool? obsecureText;
   final Icon? prefixIcon;
   final TextEditingController? controller;
+  final String? Function(String?)? validator;
   const TextFieldBuilder({
     Key? key,
     this.obsecureText,
     this.prefixIcon,
     this.controller,
+    this.validator,
   }) : super(key: key);
 
   @override
@@ -17,6 +19,7 @@ class TextFieldBuilder extends StatelessWidget {
     return SizedBox(
       height: 50,
       child: TextFormField(
+        validator: validator,
         controller: controller,
         obscureText: obsecureText ?? false,
         decoration: InputDecoration(
