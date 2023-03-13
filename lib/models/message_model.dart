@@ -1,46 +1,45 @@
 import 'dart:convert';
-import 'dart:ffi';
-
-import 'package:dash_chat_2/dash_chat_2.dart';
 
 List<MessageModel> MessageModelFromJson(String str) =>
     List<MessageModel>.from(
         json.decode(str).map((x) => MessageModel.fromJson(x)));
 
 class MessageModel {
-  String? id;
-  String? user;
-  String? uid;
+  int? id;
+  String? sender;
+  int? senderId;
+  int? receiverId;
   String? message;
-
-  int? created;
+  String? created;
 
   MessageModel(
       {this.id,
-      this.user,
-      required this.uid,
+      this.sender,
+      this.senderId,
+      this.receiverId,
       this.message,
       this.created});
 
   MessageModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    uid = json['uid'];
-    user = json['username'];
+    senderId = json['sender_id'];
+    receiverId = json['receiver_id'];
+    sender = json['sender'];
     message = json['message'];
     created = json['created'];
   }
 
-//   Map<String, dynamic> toJson() {
-//     final Map<String, dynamic> data = <String, dynamic>{};
-//     data['id'] = id;
-//     if (user != null) {
-//       data['user'] = user!.toJson();
-//     }
-//     data['message'] = message;
-//     data['created'] = created;
-//     return data;
-//   }
-// }
+  // Map<String, dynamic> toJson() {
+  //   final Map<String, dynamic> data = <String, dynamic>{};
+  //   data['id'] = id;
+  //   if (user != null) {
+  //     data['user'] = user!.toJson();
+  //   }
+  //   data['message'] = message;
+  //   data['created'] = created;
+  //   return data;
+  // }
+}
 
 // class User {
 //   String? id;
@@ -59,4 +58,4 @@ class MessageModel {
 //     data['username'] = this.username;
 //     return data;
 //   }
-}
+

@@ -15,6 +15,8 @@ class StudentModel {
   String? academicYear;
   String? phone;
   String? biography;
+  String? profilePic;
+  int? role;
 
   StudentModel(
       {this.userId,
@@ -22,7 +24,9 @@ class StudentModel {
       this.universityNumber,
       this.academicYear,
       this.phone,
-      this.biography});
+      this.biography,
+      this.role,
+      this.profilePic});
 
   StudentModel.fromJson(Map<String, dynamic> json) {
     userId = json['userID'];
@@ -31,6 +35,8 @@ class StudentModel {
     academicYear = json['academic_year'];
     phone = json['phone'];
     biography = json['biography'];
+    profilePic = json['profile_picture'];
+    role = json['role'];
   }
 
   Map<String, dynamic> toJson() {
@@ -41,6 +47,7 @@ class StudentModel {
     data['academic_year'] = academicYear;
     data['phone'] = phone;
     data['biography'] = biography;
+    data['profile_picture'] = profilePic;
     return data;
   }
 }

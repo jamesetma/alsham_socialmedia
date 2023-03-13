@@ -1,20 +1,21 @@
 import 'package:alsham_socialmedia/constants/app_colors.dart';
 import 'package:alsham_socialmedia/constants/paddings.dart';
 import 'package:alsham_socialmedia/controllers/auth_controller.dart';
+import 'package:alsham_socialmedia/controllers/student_controller.dart';
 import 'package:alsham_socialmedia/customfullscreendialog.dart';
 import 'package:alsham_socialmedia/views/components/button_builder.dart';
 import 'package:alsham_socialmedia/views/components/textfield_builder.dart';
-import 'package:alsham_socialmedia/views/pages/admin_login_page.dart';
-import 'package:alsham_socialmedia/views/pages/forgot_password.dart';
 import 'package:alsham_socialmedia/views/pages/landing_page.dart';
+import 'package:alsham_socialmedia/views/pages/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class LoginPage extends StatelessWidget {
-  final role = 0;
-
-  LoginPage({super.key});
+class AdminLoginPage extends StatelessWidget {
+  AdminLoginPage({super.key});
   final AuthController auth = Get.put(AuthController());
+  // final StudentController studentController =
+  //     Get.put(StudentController());`
+  final role = 1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +30,7 @@ class LoginPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'Sign In as Student',
+              'Sign In as Admin',
               style: TextStyle(
                   fontWeight: FontWeight.w600, fontSize: 16),
             ),
@@ -67,7 +68,8 @@ class LoginPage extends StatelessWidget {
                     onPressed: () async {
                       CustomFullScreenDialog.showDialog();
                       await auth.login().then((value) {
-                        Get.offAll(() => LandingPage());
+                        Get.offAll(() => LandingPage(),
+                            arguments: role);
                         CustomFullScreenDialog.cancelDialog();
                       });
                     },
@@ -79,9 +81,9 @@ class LoginPage extends StatelessWidget {
               alignment: Alignment.center,
               child: TextButton(
                   onPressed: () {
-                    Get.to(() => AdminLoginPage());
+                    Get.to(() => LoginPage());
                   },
-                  child: const Text('Admin? Login here')),
+                  child: Text('Student? Login here')),
             )
           ],
         ),

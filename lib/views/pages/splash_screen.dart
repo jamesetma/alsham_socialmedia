@@ -1,25 +1,38 @@
-// import 'package:alsham_socialmedia/controllers/splash_controller.dart';
-// import 'package:flutter/material.dart';
+import 'dart:async';
 
-// import 'package:get/get.dart';
+import 'package:alsham_socialmedia/views/pages/login_page.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-// class SplashView extends StatelessWidget {
-//   SplashController controller = Get.put(SplashController());
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
 
-//   @override
-//   Widget build(BuildContext context) {
-//     Future.delayed(const Duration(seconds: 3), () async {
-//       controller.choosePath();
-//     });
-//     return Scaffold(
-//       body: SizedBox(
-//         height: Get.height,
-//         width: Get.width,
-//         child: Image.asset(
-//           'assets/alsham_logo.jpg',
-//           fit: BoxFit.contain,
-//         ),
-//       ),
-//     );
-//   }
-// }
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  Widget build(BuildContext context) {
+    Timer(const Duration(seconds: 5), () => Get.off(LoginPage()));
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(height: 90),
+            CircleAvatar(
+              radius: Get.height / 3,
+              backgroundColor: Colors.white,
+              child: Image(
+                image: AssetImage('assets/images/SAS.gif'),
+              ),
+            ),
+            SizedBox(height: 90),
+          ],
+        ),
+      ),
+    );
+  }
+}

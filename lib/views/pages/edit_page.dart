@@ -1,15 +1,18 @@
 import 'package:alsham_socialmedia/constants/app_colors.dart';
 import 'package:alsham_socialmedia/constants/paddings.dart';
 import 'package:alsham_socialmedia/controllers/auth_controller.dart';
+import 'package:alsham_socialmedia/controllers/student_controller.dart';
 import 'package:alsham_socialmedia/models/student_model.dart';
 import 'package:alsham_socialmedia/views/components/button_builder.dart';
 import 'package:alsham_socialmedia/views/components/textbox_builder.dart';
 import 'package:alsham_socialmedia/views/components/textfield_builder.dart';
+import 'package:alsham_socialmedia/views/pages/my_profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class EditPage extends StatelessWidget {
-  AuthController auth = Get.find<AuthController>();
+  // Controller auth = Get.find<StudentController>();
+  StudentController controller = Get.find<StudentController>();
   @override
   Widget build(BuildContext context) {
     StudentModel student = Get.arguments;
@@ -18,9 +21,11 @@ class EditPage extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
-        leading: const BackButton(
-          color: Colors.black,
-        ),
+        leading: BackButton(
+            color: Colors.black,
+            onPressed: () {
+              Get.to(() => MyProfilePage());
+            }),
       ),
       body: Padding(
         padding: Paddings.sidePadding,
@@ -35,9 +40,10 @@ class EditPage extends StatelessWidget {
                 padding: EdgeInsets.only(top: 16),
                 child: Text('Name'),
               ),
-              TextFieldBuilder(controller: auth.studentName),
+              TextFieldBuilder(controller: controller.studentName),
               const Text('Academic Year'),
-              TextFieldBuilder(controller: auth.studentAcademicYear),
+              TextFieldBuilder(
+                  controller: controller.studentAcademicYear),
               Row(
                 children: [
                   Expanded(
@@ -46,32 +52,34 @@ class EditPage extends StatelessWidget {
                       children: [
                         const Text('Phone number'),
                         TextFieldBuilder(
-                            controller: auth.studentPhone),
+                            controller: controller.studentPhone),
                       ],
                     ),
                   ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text('Gender'),
-                        TextFieldBuilder(),
-                      ],
-                    ),
-                  ),
+                  // const SizedBox(
+                  //   width: 10,
+                  // ),
+                  // Expanded(
+                  //   child: Column(
+                  //     crossAxisAlignment: CrossAxisAlignment.start,
+                  //     children: [
+                  //       const Text('Gender'),
+                  //       TextFieldBuilder(),
+                  //     ],
+                  //   ),
+                  // ),
                 ],
               ),
               const Text('About'),
-              TextBoxBuilder(controller: auth.studentBiography),
+              TextBoxBuilder(controller: controller.studentBiography),
               Padding(
                 padding: const EdgeInsets.only(top: 30),
                 child: ButtonBuilder(
                   text: 'Update',
                   onPressed: () {
-                    auth.editStudent(auth.account['userID']);
+                    controller.editStudent(
+                        controller.studentId, null);
+                    Get.to(() => MyProfilePage());
                   },
                   color: AppColors.appPrimary,
                 ),
@@ -93,7 +101,7 @@ class uploadImageButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       alignment: Alignment.bottomRight,
-      children: [
+      children: const [
         CircleAvatar(
           radius: 40,
         ),

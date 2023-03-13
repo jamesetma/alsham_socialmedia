@@ -1,0 +1,97 @@
+import 'package:alsham_socialmedia/constants/app_colors.dart';
+import 'package:alsham_socialmedia/constants/paddings.dart';
+import 'package:alsham_socialmedia/controllers/announcements_controller.dart';
+import 'package:alsham_socialmedia/controllers/student_controller.dart';
+import 'package:alsham_socialmedia/controllers/tag_controller.dart';
+import 'package:alsham_socialmedia/views/components/button_builder.dart';
+import 'package:alsham_socialmedia/views/components/textbox_builder.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+class CreatePostPage extends StatefulWidget {
+  const CreatePostPage({super.key});
+
+  @override
+  State<CreatePostPage> createState() => _CreatePostPageState();
+}
+
+class _CreatePostPageState extends State<CreatePostPage> {
+  AnnouncementsController controller =
+      Get.find<AnnouncementsController>();
+  TagController tag = Get.find<TagController>();
+
+  StudentController studentController = Get.find<StudentController>();
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        elevation: 0,
+        backgroundColor: Colors.white,
+        title: const Text(
+          'Post',
+          style: TextStyle(color: Colors.black),
+        ),
+      ),
+      body: Padding(
+        padding: Paddings.sidePadding,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Padding(
+              padding: EdgeInsets.only(top: 8),
+              child: Text('Select image'),
+            ),
+            ButtonBuilder(
+              textColor: Colors.white,
+              text: 'upload image',
+              onPressed: () {},
+              color: AppColors.appPrimary,
+            ),
+            const Padding(
+              padding: EdgeInsets.only(top: 8),
+              child: Text('Add caption'),
+            ),
+            TextBoxBuilder(
+              controller: controller.caption,
+            ),
+            const Padding(
+              padding: EdgeInsets.only(top: 8),
+              child: Text('Add hashtag'),
+            ),
+            DropdownButton<String>(
+              hint: const Text('Tags'),
+              value: studentController.tagName,
+              onChanged: (value) {
+                setState(() {
+                  studentController.setTagName(value!);
+                });
+              },
+              items: tag.tagNameList
+                  .map(
+                    (e) => DropdownMenuItem<String>(
+                      child: Text(e),
+                      value: e,
+                    ),
+                  )
+                  .toList(),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 16),
+              child: ButtonBuilder(
+                onPressed: () async {
+                  await controller
+                      .postAnnouncement()
+                      .whenComplete(() => Get.back());
+                },
+                color: AppColors.appPrimary,
+                text: 'Post',
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+    ;
+  }
+}

@@ -1,53 +1,46 @@
+import 'package:alsham_socialmedia/constants/app_colors.dart';
 import 'package:alsham_socialmedia/controllers/auth_controller.dart';
-import 'package:alsham_socialmedia/controllers/chat_controller.dart';
+import 'package:alsham_socialmedia/controllers/newchat_controller.dart';
 import 'package:dash_chat_2/dash_chat_2.dart';
-import 'package:intl/date_symbol_data_local.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class Basic extends StatefulWidget {
-  @override
-  _BasicState createState() => _BasicState();
-}
-
-ChatController chat = Get.put(ChatController());
-AuthController auth = Get.find<AuthController>();
-
-class _BasicState extends State<Basic> {
-  @override
-  void initState() {
-    super.initState();
-    initializeDateFormatting();
-  }
-
+class ChatPage extends StatelessWidget {
+  ChatPage({super.key});
+  ChatController chat =
+      Get.put(ChatController(receiverId: Get.arguments.toString()));
+  AuthController auth = Get.find<AuthController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Basic example'),
-      ),
+          backgroundColor: AppColors.white,
+          centerTitle: true,
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back, color: Colors.black),
+            onPressed: () {
+              chat.dispose();
+              Get.back();
+            },
+          ),
+          title: const Text(
+            'Chat',
+            style: TextStyle(color: Colors.black),
+          ),
+          elevation: 0),
       body: Obx(() {
         return DashChat(
-          currentUser: chat.user,
-          onSend: (ChatMessage m) {
-            setState(() {
-              chat.messagesList.insert(0, m);
-              chat.socket.emit("message", {
-                "uid": chat.user.id,
-                "username": chat.user.firstName,
-                "message": m.text,
-              });
-            });
-          },
-
-          messageOptions: MessageOptions(showTime: true),
-          // messageListOptions:
-          // MessageListOptions(dateSeparatorFormat:  ),
-          // inputOptions: InputOptions(),
-          // ignore: invalid_use_of_protected_member
-          messages: chat.messagesList.value,
-        );
+            currentUser: chat.currentUser,
+            onSend: (ChatMessage m) async {
+              // chat.messages.insert(0, m);
+              await chat
+                  .sendMessage(m.text, Get.arguments.toString())
+                  .whenComplete(() => chat.getUserMessages(
+                      chat.currentUser.id, Get.arguments.toString()));
+            },
+            messageOptions: const MessageOptions(showTime: true),
+            messages: chat.messages.value);
       }),
     );
   }

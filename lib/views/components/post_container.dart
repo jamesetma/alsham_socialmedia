@@ -1,10 +1,17 @@
 import 'package:alsham_socialmedia/constants/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:iconly/iconly.dart';
 
 class PostContainer extends StatelessWidget {
   final String? imageLink;
-  const PostContainer({Key? key, this.imageLink}) : super(key: key);
+  final String name;
+
+  final String caption;
+  const PostContainer(
+      {Key? key,
+      this.imageLink,
+      required this.caption,
+      required this.name})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,21 +24,22 @@ class PostContainer extends StatelessWidget {
       ),
       child: Column(mainAxisSize: MainAxisSize.min, children: [
         Row(
-          children: const [
+          children: [
             CircleAvatar(
               backgroundImage: null,
             ),
-            SizedBox(
+            const SizedBox(
               width: 8,
             ),
             Text(
-              'Seveen',
+              name,
             ),
           ],
         ),
-        const Align(
+        const SizedBox(height: 10),
+        Align(
           alignment: Alignment.centerLeft,
-          child: Text('shfliugfiluer ich bin blyat'),
+          child: Text(caption, softWrap: true),
         ),
         imageLink == null
             ? const SizedBox()
@@ -42,21 +50,6 @@ class PostContainer extends StatelessWidget {
                   child: Image.network(imageLink!, fit: BoxFit.cover),
                 ),
               ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(IconlyLight.heart),
-            ),
-            const Text('200'),
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(IconlyBold.chat),
-            ),
-            const Text('50'),
-          ],
-        )
       ]),
     );
   }

@@ -1,63 +1,79 @@
 import 'package:alsham_socialmedia/constants/app_colors.dart';
 import 'package:alsham_socialmedia/constants/paddings.dart';
-import 'package:alsham_socialmedia/controllers/auth_controller.dart';
+import 'package:alsham_socialmedia/controllers/student_controller.dart';
+import 'package:alsham_socialmedia/controllers/tag_controller.dart';
 import 'package:alsham_socialmedia/models/student_model.dart';
+import 'package:alsham_socialmedia/models/student_subject_model.dart';
 import 'package:alsham_socialmedia/views/components/button_builder.dart';
-import 'package:alsham_socialmedia/views/pages/chat_page.dart';
 import 'package:alsham_socialmedia/views/pages/edit_page.dart';
+import 'package:alsham_socialmedia/views/pages/personal_info_page.dart';
+import 'package:alsham_socialmedia/views/pages/signup_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class MyProfilePage extends StatelessWidget {
-  // AuthController authController = Get.put(AuthController());
+class MyProfilePage extends StatefulWidget {
+  const MyProfilePage({super.key});
 
+  @override
+  State<MyProfilePage> createState() => _MyProfilePageState();
+}
+
+class _MyProfilePageState extends State<MyProfilePage> {
+  StudentController controller = Get.find<StudentController>();
+  TagController tag = Get.find<TagController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          controller.isAdmin() == false
+              ? SizedBox()
+              : IconButton(
+                  onPressed: () {
+                    Get.to(() => PersonalInfoPage());
+                  },
+                  color: Colors.black,
+                  icon: Icon(Icons.add),
+                ),
+        ],
         backgroundColor: AppColors.white,
         elevation: 0,
         centerTitle: true,
-        title: const Text(
-          'My Profile',
-          style: TextStyle(color: Colors.black),
-        ),
+        title: const Text('My Profile',
+            style: TextStyle(color: Colors.black)),
       ),
       body: SingleChildScrollView(
         child: Padding(
           padding: Paddings.bothPadding,
-          child: FutureBuilder(
-              future: auth.getStudent(),
-              builder:
-                  (context, AsyncSnapshot<StudentModel> snapshot) {
-                Rx<StudentModel?> student = snapshot.data.obs;
-                return student == null
-                    ? Center(
-                        child: Container(
-                          child: CircularProgressIndicator(),
-                        ),
-                      )
-                    : GetBuilder(
-                        assignId: true,
-                        id: "myProfile",
-                        init: AuthController(),
-                        builder: (context) {
-                          return Column(
+          child: Column(
+            children: [
+              FutureBuilder(
+                  future: controller.getStudent(),
+                  builder: (context,
+                      AsyncSnapshot<StudentModel> snapshot) {
+                    StudentModel? student = snapshot.data;
+                    return student == null
+                        ? const Center(
+                            child: CircularProgressIndicator(),
+                          )
+                        : Column(
                             crossAxisAlignment:
                                 CrossAxisAlignment.start,
                             children: [
                               ListTile(
-                                leading: CircleAvatar(radius: 30),
-                                title:
-                                    Text(student.value!.studentName!),
-                                subtitle: Text(
-                                    student.value!.academicYear ??
-                                        ''),
+                                leading:
+                                    const CircleAvatar(radius: 30),
+                                title: Text(student.studentName!),
+                                subtitle: controller.isAdmin() == true
+                                    ? SizedBox()
+                                    : Text(
+                                        student.academicYear ?? ''),
                               ),
                               Padding(
-                                padding: EdgeInsets.only(bottom: 8),
+                                padding:
+                                    const EdgeInsets.only(bottom: 8),
                                 child: Text(
-                                  student.value!.biography ?? '',
+                                  student.biography ?? '',
                                 ),
                               ),
                               SizedBox(
@@ -68,15 +84,61 @@ class MyProfilePage extends StatelessWidget {
                                       color: AppColors.white),
                                   onPressed: () {
                                     Get.to(() => EditPage(),
-                                        arguments: student.value);
+                                        arguments: student);
                                   },
                                   text: 'Edit Profile',
                                 ),
                               ),
                             ],
                           );
-                        });
-              }),
+                  }),
+              const SizedBox(
+                height: 25,
+              ),
+              controller.isAdmin() == true
+                  ? SizedBox()
+                  : Column(
+                      children: [
+                        DropdownButton<String>(
+                          hint: const Text('Subjects'),
+                          value: controller.tagName,
+                          onChanged: (value) {
+                            setState(() {
+                              controller.setTagName(value!);
+                            });
+                          },
+                          items: tag.tagNameList
+                              .map(
+                                (e) => DropdownMenuItem<String>(
+                                  child: Text(e),
+                                  value: e,
+                                ),
+                              )
+                              .toList(),
+                        ),
+                        Column(
+                          children: [
+                            for (StudentSubjectModel item
+                                in controller.studentSubjects)
+                              ListTile(
+                                  title: Text(item.tagId.toString()))
+                          ],
+                        ),
+                        ButtonBuilder(
+                          text: "Add",
+                          onPressed: () async {
+                            await controller.addStudentSubject();
+                            controller.studentSubjects.assignAll(
+                                await controller
+                                    .getStudentSubjects());
+
+                            setState(() {});
+                          },
+                        )
+                      ],
+                    )
+            ],
+          ),
         ),
       ),
     );

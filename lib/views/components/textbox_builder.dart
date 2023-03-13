@@ -6,6 +6,7 @@ class TextBoxBuilder extends StatelessWidget {
   const TextBoxBuilder({Key? key, this.controller}) : super(key: key);
 
   final TextEditingController? controller;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(

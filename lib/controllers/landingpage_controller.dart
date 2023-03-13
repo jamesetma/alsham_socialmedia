@@ -1,7 +1,9 @@
+import 'package:alsham_socialmedia/controllers/tag_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class LandingPageController extends GetxController {
+  TagController tags = Get.put(TagController());
   late PageController pageController;
   RxInt currentIndex = 0.obs;
 

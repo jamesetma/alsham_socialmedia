@@ -1,11 +1,11 @@
 import 'package:alsham_socialmedia/constants/app_colors.dart';
 import 'package:alsham_socialmedia/controllers/landingpage_controller.dart';
+import 'package:alsham_socialmedia/controllers/student_controller.dart';
 import 'package:alsham_socialmedia/views/pages/all_chats_page.dart';
 import 'package:alsham_socialmedia/views/pages/announcements_page.dart';
-import 'package:alsham_socialmedia/views/pages/home_page.dart';
+import 'package:alsham_socialmedia/views/pages/inqueries_page.dart';
 import 'package:alsham_socialmedia/views/pages/lectures_page.dart';
 import 'package:alsham_socialmedia/views/pages/my_profile_page.dart';
-import 'package:alsham_socialmedia/views/pages/upload_lectures_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
@@ -13,9 +13,11 @@ import 'package:iconly/iconly.dart';
 class LandingPage extends StatelessWidget {
   LandingPage({Key? key}) : super(key: key);
   LandingPageController controller = Get.put(LandingPageController());
+  StudentController studentController = Get.put(StudentController());
 
   @override
   Widget build(BuildContext context) {
+    studentController.role = Get.arguments ?? 0;
     return SafeArea(
       child: Scaffold(
         body: PageView(
@@ -24,11 +26,11 @@ class LandingPage extends StatelessWidget {
               parent: NeverScrollableScrollPhysics(),
             ),
             children: [
-              HomePage(),
+              InqueriesPage(),
               AnnouncementsPage(),
               LecturesPage(),
               AllChatsPage(),
-              MyProfilePage()
+              const MyProfilePage()
             ]),
         bottomNavigationBar: Obx(
           () => BottomNavigationBar(
