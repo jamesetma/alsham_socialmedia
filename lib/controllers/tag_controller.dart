@@ -11,7 +11,7 @@ class TagController extends GetxController {
 
   @override
   void onInit() async {
-    await getTags().whenComplete(() {
+    await getTags().then((e) {
       for (int i = 0; i < tags.length; i++) {
         tagNameList.add(tags[i].tagDescr!);
         print(tagNameList[i]);

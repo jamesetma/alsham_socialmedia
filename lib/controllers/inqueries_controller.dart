@@ -25,7 +25,7 @@ class InqueriesController extends GetxController {
 
   RxList<InqueriesModel> inqueries = RxList<InqueriesModel>();
   RxList<InqueriesModel> filteredInqueries = RxList<InqueriesModel>();
-  List<InqueriesModel> newAnns = [];
+  List<InqueriesModel> newInqs = [];
   @override
   void onInit() async {
     studentController = Get.find<StudentController>();
@@ -48,9 +48,9 @@ class InqueriesController extends GetxController {
 
     ApiService api = ApiService(
         url: "inqueries/", accessToken: auth.account['accessToken']);
-    newAnns = await api.fetchInqueries();
+    newInqs = await api.fetchInqueries();
 
-    inqueries.assignAll(newAnns);
+    inqueries.assignAll(newInqs);
 
     for (int i = 0;
         i < studentController.studentSubjects.length;
@@ -59,8 +59,8 @@ class InqueriesController extends GetxController {
           inqueries.every(
               (element) => !filteredInqueries.contains(element)),
           inqueries
-              .where((announcement) =>
-                  int.parse(announcement.tagId!) ==
+              .where((inqueries) =>
+                  int.parse(inqueries.tagId!) ==
                   studentController.studentSubjects[i].tagId)
               .toList());
     }

@@ -33,62 +33,64 @@ class _CreatePostPageState extends State<CreatePostPage> {
           style: TextStyle(color: Colors.black),
         ),
       ),
-      body: Padding(
-        padding: Paddings.sidePadding,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Padding(
-              padding: EdgeInsets.only(top: 8),
-              child: Text('Select image'),
-            ),
-            ButtonBuilder(
-              textColor: Colors.white,
-              text: 'upload image',
-              onPressed: () {},
-              color: AppColors.appPrimary,
-            ),
-            const Padding(
-              padding: EdgeInsets.only(top: 8),
-              child: Text('Add caption'),
-            ),
-            TextBoxBuilder(
-              controller: controller.caption,
-            ),
-            const Padding(
-              padding: EdgeInsets.only(top: 8),
-              child: Text('Add hashtag'),
-            ),
-            DropdownButton<String>(
-              hint: const Text('Tags'),
-              value: studentController.tagName,
-              onChanged: (value) {
-                setState(() {
-                  studentController.setTagName(value!);
-                });
-              },
-              items: tag.tagNameList
-                  .map(
-                    (e) => DropdownMenuItem<String>(
-                      child: Text(e),
-                      value: e,
-                    ),
-                  )
-                  .toList(),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 16),
-              child: ButtonBuilder(
-                onPressed: () async {
-                  await controller
-                      .postAnnouncement()
-                      .then((i) => Get.back());
-                },
-                color: AppColors.appPrimary,
-                text: 'Post',
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: Paddings.sidePadding,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(top: 8),
+                child: Text('Select image'),
               ),
-            )
-          ],
+              ButtonBuilder(
+                textColor: Colors.white,
+                text: 'upload image',
+                onPressed: () {},
+                color: AppColors.appPrimary,
+              ),
+              const Padding(
+                padding: EdgeInsets.only(top: 8),
+                child: Text('Add caption'),
+              ),
+              TextBoxBuilder(
+                controller: controller.caption,
+              ),
+              const Padding(
+                padding: EdgeInsets.only(top: 8),
+                child: Text('Add hashtag'),
+              ),
+              DropdownButton<String>(
+                hint: const Text('Tags'),
+                value: studentController.tagName,
+                onChanged: (value) {
+                  setState(() {
+                    studentController.setTagName(value!);
+                  });
+                },
+                items: tag.tagNameList
+                    .map(
+                      (e) => DropdownMenuItem<String>(
+                        child: Text(e),
+                        value: e,
+                      ),
+                    )
+                    .toList(),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 16),
+                child: ButtonBuilder(
+                  onPressed: () async {
+                    await controller
+                        .postAnnouncement()
+                        .then((i) => Get.back());
+                  },
+                  color: AppColors.appPrimary,
+                  text: 'Post',
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

@@ -7,7 +7,6 @@ import 'package:alsham_socialmedia/models/message_model.dart';
 import 'package:alsham_socialmedia/models/student_model.dart';
 import 'package:alsham_socialmedia/models/student_subject_model.dart';
 import 'package:alsham_socialmedia/models/tag_model.dart';
-import 'package:alsham_socialmedia/views/pages/create_announcement_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 

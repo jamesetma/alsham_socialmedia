@@ -25,7 +25,7 @@ class ChatPage extends StatelessWidget {
             },
           ),
           title: const Text(
-            'Chat',
+            'Alaa',
             style: TextStyle(color: Colors.black),
           ),
           elevation: 0),

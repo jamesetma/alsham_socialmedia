@@ -42,15 +42,13 @@ class AuthController extends GetxController {
       return await api.loginStudent().then((value) async {
         // print(value.body);
         if (value.statusCode == 200) {
+          print(value.statusCode);
           await json.decode(
             value.body,
             reviver: (key, value) => account.addAll({key: value}),
           );
-          // await prefs.setString("token", account['accessToken']);
-          // await prefs.setBool("isLoggedIn", true);
-
-          // print(account["accessToken"]);
         }
+        return value;
       });
     } catch (e) {
       print('erroooooooor');

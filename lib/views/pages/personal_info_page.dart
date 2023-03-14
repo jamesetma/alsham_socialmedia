@@ -105,9 +105,8 @@ class PersonalInfoPage extends StatelessWidget {
                               // if(controller.key1.currentState.validate)
                               Map user = {};
                               await auth.signup().then((value) async {
-                                controller.createStudent(await json
-                                    .decode(value.body,
-                                        reviver: (k, v) {
+                                controller.createStudent(json.decode(
+                                    value.body, reviver: (k, v) {
                                   user.addAll({k: v});
                                   print(user['userID']);
                                   return user['userID'];

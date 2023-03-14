@@ -48,15 +48,6 @@ class AdminLoginPage extends StatelessWidget {
               obsecureText: true,
               controller: auth.password,
             ),
-            // Align(
-            //   alignment: Alignment.centerRight,
-            //   child: TextButton(
-            //     onPressed: () {
-            //       Get.to(() => ForgotPassword());
-            //     },
-            //     child: const Text('Forgot Password?'),
-            //   ),
-            // ),
             Expanded(
               child: Align(
                 alignment: Alignment.bottomCenter,
@@ -66,12 +57,17 @@ class AdminLoginPage extends StatelessWidget {
                     text: 'Sign In',
                     color: AppColors.appPrimary,
                     onPressed: () async {
+                      var res;
                       CustomFullScreenDialog.showDialog();
-                      await auth.login().then((value) {
+                      res = await auth.login().then((value) {
+                        return value;
+                      });
+                      if (res.statusCode == 200) {
                         Get.offAll(() => LandingPage(),
                             arguments: role);
                         CustomFullScreenDialog.cancelDialog();
-                      });
+                      } else
+                        CustomFullScreenDialog.cancelDialog();
                     },
                   ),
                 ),
@@ -81,6 +77,8 @@ class AdminLoginPage extends StatelessWidget {
               alignment: Alignment.center,
               child: TextButton(
                   onPressed: () {
+                    auth.username.text = '';
+                    auth.password.text = '';
                     Get.to(() => LoginPage());
                   },
                   child: Text('Student? Login here')),

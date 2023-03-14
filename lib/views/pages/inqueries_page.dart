@@ -6,6 +6,7 @@ import 'package:alsham_socialmedia/controllers/storage_controller.dart';
 import 'package:alsham_socialmedia/controllers/student_controller.dart';
 import 'package:alsham_socialmedia/views/components/post_container.dart';
 import 'package:alsham_socialmedia/views/pages/create_announcement_page.dart';
+import 'package:alsham_socialmedia/views/pages/create_inquery.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
@@ -26,14 +27,14 @@ class InqueriesPage extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () {
-                Get.to(() => CreatePostPage());
+                Get.to(() => CreateInqueriesPage());
               },
               color: Colors.black,
               icon: const Icon(Icons.add)),
           IconButton(
               onPressed: () async {
                 await controller.getInqueries().then((value) {
-                  print('reloaded!!!');
+                  print('reloaded inqueries');
                 });
               },
               color: Colors.black,
@@ -48,24 +49,31 @@ class InqueriesPage extends StatelessWidget {
       body: Obx(() {
         return Padding(
           padding: Paddings.sidePadding,
-          child: ListView.builder(
-              itemCount: studentController.isAdmin() == true
-                  ? controller.inqueries.value.length
-                  : controller.filteredInqueries.value.length,
-              itemBuilder: (context, index) {
-                return Column(children: [
-                  PostContainer(
-                    name: studentController.isAdmin() == true
-                        ? controller.inqueries[index].username!
-                        : controller
+          child: studentController.isAdmin() == true
+              ? ListView.builder(
+                  itemCount: controller.inqueries.value.length,
+                  itemBuilder: (context, index) {
+                    return Column(children: [
+                      PostContainer(
+                          name: controller.inqueries[index].username!,
+                          caption: controller.inqueries[index].text!),
+                      const Divider()
+                    ]);
+                  })
+              : ListView.builder(
+                  itemCount:
+                      controller.filteredInqueries.value.length,
+                  itemBuilder: (context, index) {
+                    return Column(children: [
+                      PostContainer(
+                        name: controller
                             .filteredInqueries[index].username!,
-                    caption: studentController.isAdmin() == true
-                        ? controller.inqueries[index].text!
-                        : controller.filteredInqueries[index].text!,
-                  ),
-                  const Divider()
-                ]);
-              }),
+                        caption:
+                            controller.filteredInqueries[index].text!,
+                      ),
+                      const Divider()
+                    ]);
+                  }),
         );
       }),
     );

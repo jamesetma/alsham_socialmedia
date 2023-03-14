@@ -35,19 +35,16 @@ class AnnouncementsController extends GetxController {
     tagValue.value = 'Tags';
     tags.assignAll(tagController.tags);
     tagNameList.assignAll(tagController.tagNameList);
-    await getAnnoucements();
+    await tagController.getTags().then((value) async {
+      await getAnnoucements();
+      selectedTag = tags.firstWhere(
+          (element) => element.tagDescr == tagValue.value);
+      timer = Timer.periodic(const Duration(seconds: 5), (_) {
+        getAnnoucements();
+      });
+    });
 
     super.onInit();
-  }
-
-  @override
-  void onReady() {
-    selectedTag = tags
-        .firstWhere((element) => element.tagDescr == tagValue.value);
-    timer = Timer.periodic(const Duration(seconds: 5), (t) async {
-      await getAnnoucements();
-    });
-    super.onReady();
   }
 
   Future getAnnoucements() async {
